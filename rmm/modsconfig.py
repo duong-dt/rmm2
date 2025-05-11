@@ -78,6 +78,7 @@ class ModsConfig:
         import json
 
         import networkx as nx
+        import rmm.manager as manager
 
         DG = nx.DiGraph()
 
