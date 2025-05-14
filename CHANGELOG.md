@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v1.1.6 (2025-05-15)
+
+### Chores
+
+- Add ruff config
+  ([`a3c9bab`](https://github.com/duong-dt/rmm2/commit/a3c9baba9bb32d2382278d5d467603cb0b75c8d8))
+
+- Change to justfile and update list of dependencies
+  ([`b48eb20`](https://github.com/duong-dt/rmm2/commit/b48eb20f978eed3e7127c0deb397fca41ad1991c))
+
+### Continuous Integration
+
+- Update semantic-release config
+  ([`b155043`](https://github.com/duong-dt/rmm2/commit/b155043634cfd405f0f394df62379da22f9c0931))
+
+- Update uv.lock and workflow
+  ([`5b37e08`](https://github.com/duong-dt/rmm2/commit/5b37e08a2e909a41b0120f74173acd9dd43c1a64))
+
+### Documentation
+
+- Update package description
+  ([`1e3d700`](https://github.com/duong-dt/rmm2/commit/1e3d7006db380c482fe80e7a4dc27dadfdd24f20))
+
+
 ## v1.1.5 (2025-05-14)
 
 ### Documentation
