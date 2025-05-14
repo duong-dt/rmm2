@@ -86,10 +86,11 @@ remove-testing:
 
 # Release
 [group('release')]
-release: static-check
-  python-semantic-release version
+release:
+  git diff --exit-code --quiet
+  python-semantic-release --strict version
 
 [group('release')]
 [private]
 pre-release:
-  uv lock
+  uv lock --prerelease 'if-necessary'
