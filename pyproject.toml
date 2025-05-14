@@ -34,14 +34,6 @@ rmm = "rmm.cli:run"
 
 [dependency-groups]
 dev = [
-    "pytest>=7.4.2,<8",
-    "ruff",
-    "mypy>=1.5.1,<2",
-    "coverage>=7.3.1,<8",
-    "pytest-cov>=4.1.0,<5",
-    "bandit>=1.7.5,<2",
-    "safety>=2.3.5,<3",
-    "python-semantic-release>=9,<10",
 ]
 
 [tool.hatch.build.targets.sdist]
