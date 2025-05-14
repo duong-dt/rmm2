@@ -1,10 +1,10 @@
-# RMM: RimWorld Mod Manager
-
+<!-- markdownlint-disable MD013 -->
+# RMM2: RimWorld Mod Manager (forked from [rmm-spoons](https://github.com/Spoons/rmm) )
 
 [//]: # ([![RMM]&#40;https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/rmm-spoons/main/assets/badge/v2.json&#41;]&#40;https://github.com/spoons/rmm&#41;)
-[![image](https://img.shields.io/pypi/v/rmm-spoons.svg)](https://pypi.python.org/pypi/rmm-spoons)
-[![image](https://img.shields.io/pypi/l/rmm-spoons.svg)](https://pypi.python.org/pypi/rmm-spoons)
-[![image](https://img.shields.io/pypi/pyversions/rmm-spoons.svg)](https://pypi.python.org/pypi/rmm-spoons)
+[![image](https://img.shields.io/pypi/v/rmm2.svg)](https://pypi.python.org/pypi/rmm2)
+[![image](https://img.shields.io/pypi/l/rmm2.svg)](https://pypi.python.org/pypi/rmm2)
+[![image](https://img.shields.io/pypi/pyversions/rmm2.svg)](https://pypi.python.org/pypi/rmm2)
 
 [//]: # ([![Actions status]&#40;https://github.com/spoons/rmm/workflows/CI/badge.svg&#41;]&#40;https://github.com/spoons/rmm/actions&#41;)
 
@@ -27,11 +27,11 @@ RMM aims to allow subscribing to and managing mods for RimWorld without a Steam 
 a DRM-free installer.
 
 ## Table of Contents
+
 1. [Getting Sarted](#getting-started)
 1. [Detailed Installation Guide](#detailed-installation-guide)
    1. [Windows](#windows)
    1. [MacOS](#macos)
-   1. [Arch Linux](#arch-linux)
    1. [Other Linux Distributions](#installation-for-other-linux-distributions-via-pypi)
 1. [Configuration](#configuration)
 1. [Usage](#usage)
@@ -41,22 +41,26 @@ a DRM-free installer.
 1. [License](#license)
 
 ## Getting Started
-RMM is available at [`rmm`](https://pypi.org/project/rmm-spoons/) on PyPi. To install, run:
+
+RMM2 is available at [`rmm2`](https://pypi.org/project/rmm2/) on PyPi. To install, run:
 
 ```shell
-pip install rmm-spoons
+pip install rmm2
 ```
+
 Ensure that SteamCMD is set up and appended to your path. (Required for Linux/Mac only)
 
 ## Detailed Installation Guide
+
 ### Windows
 
 1. Fetch and install the most recent Python 3 release from Python's official website. During the installation, make sure to select 'add to PATH'.
    With administrative rights, launch the Command Prompt and input:
 
 1. ```shell
-   python -m pip install --user rmm-spoons
+   python -m pip install --user rmm2
    ```
+
 1. (Optional) Append C:\Users\[username]\AppData\Roaming\Python\[version]\Scripts\ to your PATH to use with just rmm.
 
 ### MacOS
@@ -66,21 +70,17 @@ Ensure that SteamCMD is set up and appended to your path. (Required for Linux/Ma
    ```shell
    brew install python3
    ```
-2. To install RMM:
+
+1. To install RMM:
+
    ```shell
-   pip3 install --user rmm-spoons
+   pip3 install --user rmm2
    ```
-3. Add Python's bin directory to your path:
+
+1. Add Python's bin directory to your path:
+
    ```shell
     echo "export PATH=\"$PATH:$HOME/Library/Python/$(python3 --version | awk '{split($2,a,".") ; print a[1] "." a[2] }')/bin\"" >> ~/.zshrc
-   ```
-### Arch Linux
-RMM is accessible via the AUR package 'rmm'.
-
-
-- Using Paru (AUR helper)
-   ```sh
-   yay -S rmm
    ```
 
 ## Installation for Other Linux Distributions (via PyPi)
@@ -104,21 +104,23 @@ echo 'export PATH="$PATH:/usr/games' >> ~/.bashrc
 exec $SHELL
 ```
 
-### Installing RMM via PyPi
+### Installing RMM2 via PyPi
 
 Install RMM via PyPi:
+
 ``` sh
-python -m pip install --user rmm-spoons
+python -m pip install --user rmm2
 ```
 
 If you encounter a unknown command error, add the following to your .bashrc:
+
 ```sh
 echo 'export PATH="$PATH:$HOME/.local/bin" >> ~/.bashrc
 exec $SHELL
 ```
 
-
 ## Configuration
+
 ### Setting RMM_PATH (Optional)
 
 If RimWorld isn't in its default directory, it's advisable to set the RMM_PATH environment variable pointing to your
@@ -138,7 +140,9 @@ export RMM_PATH="~/PATHTOGAME/game/Mods"
 ```
 
 ## Usage
-```
+
+```console
+
 RimWorld Mod Manager
 
 Usage:
@@ -205,27 +209,33 @@ argument to select from all mods.
 ```
 
 ## Example
+
 List installed packages:
+
 ```  sh
 rmm list
 ```
 
 Search workshop packages:
+
 ```  sh
 rmm search term
 ```
 
 Search locally installed mods
+
 ```  sh
 rmm query term
 ```
 
 Install package:
+
 ``` sh
 rmm sync rimhud
 ```
 
 Removing a package:
+
 ``` sh
 rmm remove fuzzy
 ```
@@ -238,26 +248,31 @@ rmm remove
 ```
 
 Saving a mod list
+
 ``` sh
 rmm export ~/modlist.txt
 ```
 
 Install mod list:
+
 ``` sh
 rmm import ~/modlist.txt
 ```
 
 Update all packages:
+
 ``` sh
 rmm update
 ```
 
 Auto sort mods:
+
 ``` sh
 rmm sort
 ```
 
 Manually sort mods:
+
 ``` sh
 rmm config
 ```
@@ -269,17 +284,18 @@ rmm order
 ```
 
 ## Tips
+
 1. Duplicating Mod Setups: If you're aiming to replicate a mod setup on a fresh installation:
+
 ```sh
 rmm -p ~/path-to-current-game export ~/modlist.txt
 rmm -p ~/path-to-new-game import ~/modlist.txt
 ```
 
-
 ## Contributing
 
-Passionate about RMM and have ideas to contribute? We're all ears! To maintain code quality, we kindly request that any code alterations be formatted using python-black. For more details, check our Contribution Guidelines.
-
+Passionate about RMM and have ideas to contribute? We're all ears! Pull-request are always welcome.
 
 ## License
+
 RMM is open-sourced under the GPLv3 License. Dive into the LICENSE file for thorough details.
