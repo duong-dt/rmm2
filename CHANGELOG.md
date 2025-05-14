@@ -1,574 +1,466 @@
 # CHANGELOG
 
 
+## v1.1.3 (2025-05-14)
 
-## v1.1.0 (2023-09-16)
+### Bug Fixes
 
-### Build
+- Mod download folder not found and autosort
+  ([`ae27405`](https://github.com/duong-dt/rmm2/commit/ae2740545908b04d3bada2876be785290d30308e))
 
-* build(deps): bump actions/checkout from 3 to 4
+- fix issue with sort command: manager not found - fix issue with sync command: unknown mod download
+  folder
 
-Bumps [actions/checkout](https://github.com/actions/checkout) from 3 to 4.
-- [Release notes](https://github.com/actions/checkout/releases)
-- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)
-- [Commits](https://github.com/actions/checkout/compare/v3...v4)
+### Continuous Integration
 
----
-updated-dependencies:
-- dependency-name: actions/checkout
-  dependency-type: direct:production
-  update-type: version-update:semver-major
-...
+- Add publish workflow
+  ([`3cae853`](https://github.com/duong-dt/rmm2/commit/3cae853003fb46fd863aa4d52a40951215fdaaa7))
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`66d496b`](https://github.com/Spoons/rmm/commit/66d496bf957e7d8dc0ee1b77d9e80e6718adfe4c))
+- Update python-semantic-release
+  ([`155f9ab`](https://github.com/duong-dt/rmm2/commit/155f9ab7083dce20e44db13371bdbbc6133aae46))
 
-* build(deps): bump actions/download-artifact from 2 to 3
 
-Bumps [actions/download-artifact](https://github.com/actions/download-artifact) from 2 to 3.
-- [Release notes](https://github.com/actions/download-artifact/releases)
-- [Commits](https://github.com/actions/download-artifact/compare/v2...v3)
+## v1.1.2 (2023-09-17)
 
----
-updated-dependencies:
-- dependency-name: actions/download-artifact
-  dependency-type: direct:production
-  update-type: version-update:semver-major
-...
+### Bug Fixes
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`a7b622f`](https://github.com/Spoons/rmm/commit/a7b622f2a64c64b6491a27380de393dfca56f6f6))
+- Add deps to packaging
+  ([`374b5d2`](https://github.com/duong-dt/rmm2/commit/374b5d2e687dfd9ba678ff2d94cb982882ecc556))
 
-* build(deps): bump actions/cache from 2 to 3
+- Add missing operations to help string
+  ([`d5f22f2`](https://github.com/duong-dt/rmm2/commit/d5f22f27c88777bc1e41a84189b1fa32d048d7f1))
 
-Bumps [actions/cache](https://github.com/actions/cache) from 2 to 3.
-- [Release notes](https://github.com/actions/cache/releases)
-- [Changelog](https://github.com/actions/cache/blob/main/RELEASES.md)
-- [Commits](https://github.com/actions/cache/compare/v2...v3)
+- Added importlib.metadata dep
+  ([`bae69d7`](https://github.com/duong-dt/rmm2/commit/bae69d7d65e7d3ddac99708843ae73a48ccfe947))
 
----
-updated-dependencies:
-- dependency-name: actions/cache
-  dependency-type: direct:production
-  update-type: version-update:semver-major
-...
+- Adds check for modsconfig
+  ([`88fdb85`](https://github.com/duong-dt/rmm2/commit/88fdb85a4f024dc690228393bec7e84ec821c27f))
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`bde1587`](https://github.com/Spoons/rmm/commit/bde1587cf5dc1792bf60a41aaf24136bd6707226))
+- Adds Union typing import
+  ([`111ee76`](https://github.com/duong-dt/rmm2/commit/111ee765ca43ed45df3e60fd4f76b8ee2559be09))
 
-* build(deps): bump actions/upload-artifact from 2 to 3
+- Ascii encode in publishedfileid
+  ([`9fdb3d7`](https://github.com/duong-dt/rmm2/commit/9fdb3d7d7d2307a053497cb4cae0568a706f94f8))
 
-Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 2 to 3.
-- [Release notes](https://github.com/actions/upload-artifact/releases)
-- [Commits](https://github.com/actions/upload-artifact/compare/v2...v3)
+- Bounds error for zero arguments
+  ([`d846adc`](https://github.com/duong-dt/rmm2/commit/d846adc6765b51ecd936c239c3778fe28eb00281))
 
----
-updated-dependencies:
-- dependency-name: actions/upload-artifact
-  dependency-type: direct:production
-  update-type: version-update:semver-major
-...
+- Break runner loop
+  ([`ac7f40c`](https://github.com/duong-dt/rmm2/commit/ac7f40c3f85508905c1e35989ccb6071b285e977))
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`e87a56b`](https://github.com/Spoons/rmm/commit/e87a56b5f2e9f62442da25592091fc4ed48666a6))
+- Check for str type on vectors
+  ([`ef50eee`](https://github.com/duong-dt/rmm2/commit/ef50eee7efa0228e95ab92c2423cba6da137b8e0))
 
-### Feature
+- Checks for 'Steam' after workshopd download
+  ([`b12daeb`](https://github.com/duong-dt/rmm2/commit/b12daeb3d084883cbbe2a50e54185654752ec5ee))
 
-* feat: adds ci/cd to repo ([`88f2274`](https://github.com/Spoons/rmm/commit/88f227428150f775d965ba849e35eef569cb9740))
+- Cli parser issue
+  ([`1250612`](https://github.com/duong-dt/rmm2/commit/12506128abf6ddbb84017f5eb5e121684fe29ccb))
 
-* feat: make rmm a compliant module ([`9b1380a`](https://github.com/Spoons/rmm/commit/9b1380ac2e4a57194f1dad537be9a6729b5231d0))
+- Compat for windows
+  ([`41877d2`](https://github.com/duong-dt/rmm2/commit/41877d2f09d107279ef3cd6adc27b10ab12b3df9))
 
-### Fix
+- Config menu error
+  ([`7d113a0`](https://github.com/duong-dt/rmm2/commit/7d113a0622945946bebe1d06f3521f36d4d33f4e))
 
-* fix: remove --noop from semantic-release ([`da2ec58`](https://github.com/Spoons/rmm/commit/da2ec58d274e8c6058a9f42ade0466fb68606599))
+- Cont cross compatibility
+  ([`be2dc33`](https://github.com/duong-dt/rmm2/commit/be2dc33a72951d6bdfc3f11392f2317ca0460481))
 
-* fix: update readme ([`bb9fdf5`](https://github.com/Spoons/rmm/commit/bb9fdf5bbcc8575f8fd0f32ae37eeffd3ccf5d45))
+- Continue merging release code
+  ([`727d1be`](https://github.com/duong-dt/rmm2/commit/727d1be87153cdc7982d56f3491651109a15f686))
 
-### Unknown
+- Correctly detect duplicated mods during sync
+  ([`4bc76e2`](https://github.com/duong-dt/rmm2/commit/4bc76e23ed55a71ac078a7e95c4422b57c2efaec))
 
-* Merge pull request #19 from Spoons/dependabot/github_actions/actions/upload-artifact-3
+- Correctly grab temp dir on macos
+  ([`a62c161`](https://github.com/duong-dt/rmm2/commit/a62c161591305045ade1b3d59b850484192c8039))
 
-build(deps): bump actions/upload-artifact from 2 to 3 ([`6e78ae0`](https://github.com/Spoons/rmm/commit/6e78ae00d6a4f07e5b9fc0687022c257c1ecab35))
+- Corrects setuptools runtime deps
+  ([`6993698`](https://github.com/duong-dt/rmm2/commit/69936983a1c9823f75d93c730d80f67e723d19e1))
 
-* Merge pull request #20 from Spoons/dependabot/github_actions/actions/cache-3
+- Error when missing publishedfileid
+  ([`bb40e52`](https://github.com/duong-dt/rmm2/commit/bb40e52192d5c1d2f5f22302ebf5618d7b9f0676))
 
-build(deps): bump actions/cache from 2 to 3 ([`b15223b`](https://github.com/Spoons/rmm/commit/b15223b98e8cee8958723ce1aca91b11efefd885))
+- Error with -p and -w arguments
+  ([`45e3444`](https://github.com/duong-dt/rmm2/commit/45e34440fc4aea591e05d750406b393aa454d4ec))
 
-* Merge pull request #21 from Spoons/dependabot/github_actions/actions/download-artifact-3
+- Exception on import command
+  ([`04c0c00`](https://github.com/duong-dt/rmm2/commit/04c0c0066a4f6bb1307924900d9fa08db0c0cfb4))
 
-build(deps): bump actions/download-artifact from 2 to 3 ([`67bd052`](https://github.com/Spoons/rmm/commit/67bd0527a3961349db324375ac4743ab49c43bd6))
+- Fix module
+  ([`7421d43`](https://github.com/duong-dt/rmm2/commit/7421d43e858492fde615e632888cb5bfb188e781))
 
-* Merge pull request #22 from Spoons/dependabot/github_actions/actions/checkout-4
+- Formatting
+  ([`2b67984`](https://github.com/duong-dt/rmm2/commit/2b679846376f709fb240d4294ce1aea6a6c402c3))
 
-build(deps): bump actions/checkout from 3 to 4 ([`3bc09a9`](https://github.com/Spoons/rmm/commit/3bc09a96cc839c5d2bf9e65ecea7436516090d93))
+- Formatting for un/install messages
+  ([`c9c2286`](https://github.com/duong-dt/rmm2/commit/c9c2286b559cf620beca9c6a0066da975c60feed))
 
-* Merge pull request #23 from Spoons/fix_semantic_release
+- Formatting, unused imports
+  ([`8e1e9f9`](https://github.com/duong-dt/rmm2/commit/8e1e9f985a6c10b042af940cb286d409329677df))
 
-fix: remove --noop from semantic-release ([`b21f120`](https://github.com/Spoons/rmm/commit/b21f120a75e55780fa95bb6f62de1f8643f282da))
+- Ignore mods with parser errors.
+  ([`01a69d6`](https://github.com/duong-dt/rmm2/commit/01a69d660b808117a08b54484e36c9c508608c5c))
 
-* Merge pull request #18 from Spoons/refactor
+- Ignore non ascii characters in pubid file
+  ([`df1ec31`](https://github.com/duong-dt/rmm2/commit/df1ec3115916d564cd82e8ccab45482bc440d8ee))
 
-Refactor, update tooling, and add CI/CD ([`1db39f2`](https://github.com/Spoons/rmm/commit/1db39f26cae68d07f1ba413358292811e3866682))
+- Improve performance
+  ([`c7236dc`](https://github.com/duong-dt/rmm2/commit/c7236dc4cf909a3f573abefc0319794ac4f814c4))
 
-* Merge branch &#39;master&#39; into refactor ([`f58d9a7`](https://github.com/Spoons/rmm/commit/f58d9a72739fa4ce499a557e832a1c946c4a3427))
+improve performance by using multiprocessing for reading in mods handle non mods in Mods directory
+  improve steamapps auto detection network calls use urllib
 
+- Improve performance with dict lookups
+  ([`01e0d4a`](https://github.com/duong-dt/rmm2/commit/01e0d4ae8d1eb2dcd57741e22e85fa24b6c0e5e2))
 
-## v1.0.17 (2023-09-15)
+- Improved vector import
+  ([`7146146`](https://github.com/duong-dt/rmm2/commit/7146146b179271e78697e74a9721d750fcc074d4))
 
-### Unknown
+- Improvements to modlist reading and writing
+  ([`e05026e`](https://github.com/duong-dt/rmm2/commit/e05026e0e85ca7644ef248e5e38049ffa0b7ce19))
 
-* Minor refactor to Mods. Fixes issue #15 ([`9155bfe`](https://github.com/Spoons/rmm/commit/9155bfe6c03094ee404df426741a21f6c23bc78c))
+- Improving autosort accuracy
+  ([`6265c64`](https://github.com/duong-dt/rmm2/commit/6265c644757226582a48affbdddb54e502e2b250))
 
+- Increment python required version
+  ([`b46e1fb`](https://github.com/duong-dt/rmm2/commit/b46e1fbbf0677402e699f5d2fd73171f96d697f1))
 
-## v1.0.16 (2023-09-14)
+- Installation logic, ui hang, file performance
+  ([`2529b41`](https://github.com/duong-dt/rmm2/commit/2529b4191c2c514a771229bb3d647fff4112beb8))
 
-### Fix
+Improves mod install and remove performance. Fixes query and search cmd hang on empty results.
 
-* fix: formatting, unused imports ([`23316d8`](https://github.com/Spoons/rmm/commit/23316d8b577ab4bd891e2e1f845b7c0bd8e663b3))
+- List not printing table
+  ([`4db7e4f`](https://github.com/duong-dt/rmm2/commit/4db7e4f0909fced9adc5bae54eecd62b997dc3ed))
 
-### Unknown
+- Mod pathing detection fix
+  ([`b91d56a`](https://github.com/duong-dt/rmm2/commit/b91d56a425d54fff23b2de43d4a970676deb820c))
 
-* switch to relative path import ([`23626b8`](https://github.com/Spoons/rmm/commit/23626b8a42c29d8cba258bffd861677667e26948))
+- Multiple fixes for mod folder management
+  ([`6d50bc5`](https://github.com/duong-dt/rmm2/commit/6d50bc5a032eea49e5f754c6254820e3bedb31b1))
 
-* fixes for steam path and unknown author ([`f6440af`](https://github.com/Spoons/rmm/commit/f6440af7ef689317ed3881e98a1616e743563ae0))
+avoid renaming existing mod folders avoid overwriting mods without a PublishedFileId without -f flag
+  allows mods ignored with '.rmm_ignore' to be overwritten with -f flag
 
-* adds usage ([`20e2466`](https://github.com/Spoons/rmm/commit/20e246611f107f8b048c1b08e8ab5b2b76e7422a))
+- Pypi readme
+  ([`b4ed88a`](https://github.com/duong-dt/rmm2/commit/b4ed88a4d63e83064b39f2e10535f4dbd05e352e))
 
-* Adds updated README.md ([`cefd444`](https://github.com/Spoons/rmm/commit/cefd444ea6ba104772c17f5efdc07f479c717699))
+- Python version
+  ([`d0cc44c`](https://github.com/duong-dt/rmm2/commit/d0cc44c9cfbe3d8d9819699f913d9f94154c80cd))
 
-* update gitignore ([`52bfada`](https://github.com/Spoons/rmm/commit/52bfadaf2e06621503c5822587aba2f1b167e9a1))
+- Readme formatting changes
+  ([`f8f6b0f`](https://github.com/duong-dt/rmm2/commit/f8f6b0f5c585e28439df5d8fa2665144b2425351))
 
-* Merge pull request #14 from bakaemon/master
+- Remove --noop from semantic-release
+  ([`c029cb3`](https://github.com/duong-dt/rmm2/commit/c029cb3934296eaca9a683387e104406d2649d7b))
 
-Choosing package by enter both indexes and ranges in one input ([`7a279ec`](https://github.com/Spoons/rmm/commit/7a279ec900c21757435549d5328d3b83f5163e73))
+- Remove debug print during collision detection
+  ([`14f4368`](https://github.com/duong-dt/rmm2/commit/14f43687394776f36809514f5b05b4a6723285f2))
 
-* Extend choosing package indexes from interger or range choosing to be able to use both ([`290bf4e`](https://github.com/Spoons/rmm/commit/290bf4ebeee841baaed9283e6144385fb79de949))
+- Remove pep-0604 for 3.9 support
+  ([`1dfb27c`](https://github.com/duong-dt/rmm2/commit/1dfb27c5b9862ba926cceec28168aefb80e9ff81))
 
+- Removed more_magic for docopt (non-ng) compatibility
+  ([`d0c9bf9`](https://github.com/duong-dt/rmm2/commit/d0c9bf9ab22bd7969d0f95e3d77b5beaccfed9c7))
 
-## v1.0.15 (2023-01-09)
+- Require RMM_MOD to be set
+  ([`7780ee0`](https://github.com/duong-dt/rmm2/commit/7780ee05528aaaed7cb64eafe8b436dec63a15a8))
 
-### Feature
+- Sanitize paths
+  ([`64c47b4`](https://github.com/duong-dt/rmm2/commit/64c47b4e28c53958821527a11934fa1ec2d8e02d))
 
-* feat: add upgrade instructions to readme ([`16c0da7`](https://github.com/Spoons/rmm/commit/16c0da77752edaec06f84cce2da7df2e4117ab1a))
+- Set pbfid to None when no pbfid file exists
+  ([`e52653b`](https://github.com/duong-dt/rmm2/commit/e52653b8d8d05f8c0cfe2a8bf4b4329bdacb680e))
 
-### Fix
+- Simplify import print
+  ([`cddcec0`](https://github.com/duong-dt/rmm2/commit/cddcec07206923293189a9d16c699bc116cb143d))
 
-* fix: checks for &#39;Steam&#39; after workshopd download ([`09679bc`](https://github.com/Spoons/rmm/commit/09679bcc779da3c99f9aa122f9f469729d6d52c7))
+- Steam downloader macos path fix
+  ([`b9c39d8`](https://github.com/duong-dt/rmm2/commit/b9c39d88c50407ea481bf73fdd6cea83434437d7))
 
-* fix: ignore mods with parser errors. ([`630a9df`](https://github.com/Spoons/rmm/commit/630a9dfee5ebbdf7920bb0105c494a68917ec0dd))
+- Style code
+  ([`6e84d75`](https://github.com/duong-dt/rmm2/commit/6e84d75faec974d50afb1ee412def5b845d659df))
 
-* fix: error when missing publishedfileid ([`35498f5`](https://github.com/Spoons/rmm/commit/35498f5745035de32f7ee65717c7126bb2b8d0b9))
+- Typing errors
+  ([`cc6d24d`](https://github.com/duong-dt/rmm2/commit/cc6d24d6c16e944a8dec36a2c785c79467bee071))
 
-### Unknown
+- Update entrypoint for v1 from module
+  ([`e3dbe80`](https://github.com/duong-dt/rmm2/commit/e3dbe80ba8e24388709824fe3baf8e20d3dd2d47))
 
-* Merge pull request #9 from dendrobiummoniliforme/patch-1
+- Update readme
+  ([`b5f1072`](https://github.com/duong-dt/rmm2/commit/b5f107297725d141217a8b76d21f14bacb29c8f5))
 
-Update mod.py to include Biotech Expansion Package ([`bb3b90e`](https://github.com/Spoons/rmm/commit/bb3b90e39e818f6944c7793514d21a8c3ad979cb))
+- Update README
+  ([`895fa3b`](https://github.com/duong-dt/rmm2/commit/895fa3bf8a381497339e49fbe38b28312a2eb6a3))
 
-* Update mod.py to include Biotech Expansion Package
+- Update_all_mods hotfix
+  ([`9ec2c8e`](https://github.com/duong-dt/rmm2/commit/9ec2c8e127002d8712781551363833e46a21f37c))
 
-See https://rimworldgame.com/biotech/ for more information :)
+- Validate interactive sync package selection
+  ([`a06f81c`](https://github.com/duong-dt/rmm2/commit/a06f81ce741a96feacf7243fed9d2a71b537bf1c))
 
-New expansion coming out soon, was reading through the code for this project and came across this. ([`7e05a59`](https://github.com/Spoons/rmm/commit/7e05a599254f5ac2d0a0c1308b3bb49d438ca96b))
+- Win paths
+  ([`d1b9b88`](https://github.com/duong-dt/rmm2/commit/d1b9b8810f03cd814d8460f2becd351b4d1369b0))
 
-* Changed Mod Author to read Authors if Author is not available ([`45023db`](https://github.com/Spoons/rmm/commit/45023db8e8bf2c53f3356cac2551f734074515db))
+### Build System
 
-* Ignore missing packaging metadata ([`1acbd47`](https://github.com/Spoons/rmm/commit/1acbd4760b61e8c1aded9e6bcc517a904686f81a))
+- **deps**: Bump actions/cache from 2 to 3
+  ([`d59f2ac`](https://github.com/duong-dt/rmm2/commit/d59f2ac76763a28281aee83c0be700494690eebd))
 
+Bumps [actions/cache](https://github.com/actions/cache) from 2 to 3. - [Release
+  notes](https://github.com/actions/cache/releases) -
+  [Changelog](https://github.com/actions/cache/blob/main/RELEASES.md) -
+  [Commits](https://github.com/actions/cache/compare/v2...v3)
 
-## v1.0.13 (2022-01-30)
+--- updated-dependencies: - dependency-name: actions/cache dependency-type: direct:production
 
-### Feature
+update-type: version-update:semver-major ...
 
-* feat: update readme for python requirement ([`db3895d`](https://github.com/Spoons/rmm/commit/db3895da8719a49087166a6b2844036160dc9105))
+Signed-off-by: dependabot[bot] <support@github.com>
 
-### Fix
+- **deps**: Bump actions/checkout from 3 to 4
+  ([`656c66e`](https://github.com/duong-dt/rmm2/commit/656c66e4c82e48e7305b34ec1ef275cbb59a729d))
 
-* fix: python version ([`ad15957`](https://github.com/Spoons/rmm/commit/ad15957390c73d09d27e74390199d408f8e7d2e4))
+Bumps [actions/checkout](https://github.com/actions/checkout) from 3 to 4. - [Release
+  notes](https://github.com/actions/checkout/releases) -
+  [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md) -
+  [Commits](https://github.com/actions/checkout/compare/v3...v4)
 
+--- updated-dependencies: - dependency-name: actions/checkout dependency-type: direct:production
 
-## v1.0.11 (2022-01-30)
+update-type: version-update:semver-major ...
 
-### Fix
+Signed-off-by: dependabot[bot] <support@github.com>
 
-* fix: config menu error ([`2c0df6b`](https://github.com/Spoons/rmm/commit/2c0df6bd3d1142d1b7078eae08ff06a14e74be8e))
+- **deps**: Bump actions/download-artifact from 2 to 3
+  ([`7a472eb`](https://github.com/duong-dt/rmm2/commit/7a472eb059c20a494bec340f21e261a22f6df45d))
 
-* fix: correctly grab temp dir on macos ([`cff1d2a`](https://github.com/Spoons/rmm/commit/cff1d2ad743f1f080406e2662294b877354fb46e))
+Bumps [actions/download-artifact](https://github.com/actions/download-artifact) from 2 to 3. -
+  [Release notes](https://github.com/actions/download-artifact/releases) -
+  [Commits](https://github.com/actions/download-artifact/compare/v2...v3)
 
-* fix: increment python required version ([`55554ab`](https://github.com/Spoons/rmm/commit/55554ab7b8ed738b0c873c5638172d1b2fa22448))
+--- updated-dependencies: - dependency-name: actions/download-artifact dependency-type:
+  direct:production
 
-* fix: steam downloader macos path fix ([`4b402fe`](https://github.com/Spoons/rmm/commit/4b402fe8652ab373db0244ec571b3569c2a80ac1))
+update-type: version-update:semver-major ...
 
+Signed-off-by: dependabot[bot] <support@github.com>
 
-## v1.0.10 (2022-01-29)
+- **deps**: Bump actions/upload-artifact from 2 to 3
+  ([`19927ba`](https://github.com/duong-dt/rmm2/commit/19927ba64401b79f1d20b952066fc8e8e094b8de))
 
-### Fix
+Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 2 to 3. - [Release
+  notes](https://github.com/actions/upload-artifact/releases) -
+  [Commits](https://github.com/actions/upload-artifact/compare/v2...v3)
 
-* fix: adds Union typing import ([`ff8d4bc`](https://github.com/Spoons/rmm/commit/ff8d4bcaf1a9e4fcf3470b6f0e35dc4f6dedf08a))
+--- updated-dependencies: - dependency-name: actions/upload-artifact dependency-type:
+  direct:production
 
+update-type: version-update:semver-major ...
 
-## v1.0.9 (2022-01-29)
+Signed-off-by: dependabot[bot] <support@github.com>
 
-### Feature
+### Features
 
-* feat: sort cli functions ([`be321b8`](https://github.com/Spoons/rmm/commit/be321b81bb35fa603b81acaeea76550ceb3cab18))
+- Add changelog and authors
+  ([`2702095`](https://github.com/duong-dt/rmm2/commit/2702095a1a9874e2b4f8552892354792c8b763d2))
 
-* feat: added verify, order, enable, disable ([`9d1c707`](https://github.com/Spoons/rmm/commit/9d1c707be62ab5bc3e6c373c3c6cd974d0da8ef1))
+- Add command line interface and usage
+  ([`51421ff`](https://github.com/duong-dt/rmm2/commit/51421ffe5214e028b12195acf1e2691365cf61a2))
 
-### Fix
+- Add interactive sync and search command
+  ([`19c777b`](https://github.com/duong-dt/rmm2/commit/19c777ba006c1b761d93e1005a91d8d407c22761))
 
-* fix: adds check for modsconfig ([`e060c9e`](https://github.com/Spoons/rmm/commit/e060c9ea8178e1d8ce3c0f4b73f3c2d8f5fa70bc))
+- Add issue template
+  ([`b878f0c`](https://github.com/duong-dt/rmm2/commit/b878f0cbd02bbd4bad86a65e1fc82506a560938d))
 
-* fix: continue merging release code ([`2839fe1`](https://github.com/Spoons/rmm/commit/2839fe14d5499547c7bbbf8c0bf06067a4b15e44))
+- Add migrate and version command
+  ([`cfed4f9`](https://github.com/duong-dt/rmm2/commit/cfed4f9afd448fc43b59fd6a794c26add4abced5))
 
-* fix: improve performance with dict lookups ([`02e1e9b`](https://github.com/Spoons/rmm/commit/02e1e9b99e1060f5531e9cc377de05797c3c9896))
+- Add mod name and author to mod lists
+  ([`4a960b2`](https://github.com/duong-dt/rmm2/commit/4a960b240ac6bb42b32a7ccf1935d3e4c6c85c6e))
 
-* fix: break runner loop ([`90bf2f1`](https://github.com/Spoons/rmm/commit/90bf2f1e235b4a338deea7d96517a47aef85f14e))
+- Add package cache seperation and mod list importing
+  ([`e5f7715`](https://github.com/duong-dt/rmm2/commit/e5f77157a8b09ac8cf991ecb240989bc1a3832ad))
 
-* fix: cont cross compatibility ([`3b25b11`](https://github.com/Spoons/rmm/commit/3b25b110c551019e219bbebebc612a24f4bb5641))
+- Add README and requirements.txt
+  ([`a36b0b7`](https://github.com/duong-dt/rmm2/commit/a36b0b7a57797f70d48da96b64f5a93b9c1f0721))
 
-* fix: remove pep-0604 for 3.9 support ([`fbc438b`](https://github.com/Spoons/rmm/commit/fbc438b34092b540d99f375673a4e70b24ed6e5a))
+- Add setuptools packaging
+  ([`7e0fcdc`](https://github.com/duong-dt/rmm2/commit/7e0fcdcb021a9f4c15392a929d962a727579d56b))
 
-* fix: update entrypoint for v1 from module ([`384a69e`](https://github.com/Spoons/rmm/commit/384a69ee686736cb499e463faf80d57a733e4dfe))
+Add setuptools metadata ReadMe updated to reflect new packaging directions.
 
-* fix: readme formatting changes ([`7df18bc`](https://github.com/Spoons/rmm/commit/7df18bc90787886307068a94eac8056528c638f2))
+- Add steamcmd auto download on windows
+  ([`0ce46f1`](https://github.com/duong-dt/rmm2/commit/0ce46f178b486be9675bfb3bd9649e31a18d213d))
 
+- Add sync cli and simplify steamcmd call
+  ([`de28555`](https://github.com/duong-dt/rmm2/commit/de285550326482036b8a03686eb960e65b5eb58e))
 
-## v1.0.4 (2022-01-26)
+- Add update, export, and import cli
+  ([`979c96a`](https://github.com/duong-dt/rmm2/commit/979c96ab7eec803b643700488d469d1b931f839f))
 
-### Feature
+- Add upgrade instructions to readme
+  ([`5dc8127`](https://github.com/duong-dt/rmm2/commit/5dc81270d49a24733a32322a0d7d2dfb452bb8a6))
 
-* feat: updates readme ([`c20ffef`](https://github.com/Spoons/rmm/commit/c20ffef06c25f38569207cf018f407b0f357a314))
+- Add variable arguments to sync commands
+  ([`b0b0e44`](https://github.com/duong-dt/rmm2/commit/b0b0e445ac79751ada9d0be4e70c154dbbc1f433))
 
+- Add workshop mod download functionality
+  ([`b670314`](https://github.com/duong-dt/rmm2/commit/b67031499c09184183e1d6aa4f1b0c91b96b6113))
 
-## v1.0.3 (2022-01-26)
+- Added verify, order, enable, disable
+  ([`1259054`](https://github.com/duong-dt/rmm2/commit/1259054bf375a805fce6e2c6e99e8a4460c2b9b0))
 
-### Fix
+- Adds autosort
+  ([`4e950a7`](https://github.com/duong-dt/rmm2/commit/4e950a73c0d8f9f27a30e00b123aec90a424e486))
 
-* fix: pypi readme ([`ed78e89`](https://github.com/Spoons/rmm/commit/ed78e89208831573a3a102f39f53c8d8dfc39064))
+- Adds basic mod test
+  ([`3774623`](https://github.com/duong-dt/rmm2/commit/3774623265e98baff2cbd7b568252c8fc5350938))
 
+- Adds basic ModsConfig processing
+  ([`c11e939`](https://github.com/duong-dt/rmm2/commit/c11e939e0f0c633eab68d3f8e4968ca3a7a78d55))
 
-## v1.0.2 (2022-01-26)
+- Adds ci/cd to repo
+  ([`2be486d`](https://github.com/duong-dt/rmm2/commit/2be486db4cede33e7a732427c57ca631bff86e85))
 
-### Feature
+- Adds cli
+  ([`b3e52b6`](https://github.com/duong-dt/rmm2/commit/b3e52b68dd3a81aa7edd47c2a2706c6f37146246))
 
-* feat: adds pipfile ([`e5fa88d`](https://github.com/Spoons/rmm/commit/e5fa88dabf05c8c6ac45248c31abc63dc6741737))
+- Adds config cli command
+  ([`d1bf38f`](https://github.com/duong-dt/rmm2/commit/d1bf38f40291c77686f1647a4b7d2e46b326dae6))
 
+- Adds curses multiselect window
+  ([`2b884d3`](https://github.com/duong-dt/rmm2/commit/2b884d37af06377779a9496ff6701872e1a0c09b))
 
-## v1.0.1 (2022-01-26)
+- Adds game and workshop finding methods
+  ([`47cea05`](https://github.com/duong-dt/rmm2/commit/47cea056ae55064aca50952cb06aa47ffd48df2e))
 
-### Fix
+- Adds list seralizers and ModList sequence
+  ([`4da5e5f`](https://github.com/duong-dt/rmm2/commit/4da5e5f8dc0f2dca0eea4067cd537dc592b39fea))
 
-* fix: win paths ([`a13a4cc`](https://github.com/Spoons/rmm/commit/a13a4cc0f475d0547954a71a37e76df166582cbb))
+- Adds pipfile
+  ([`f1f13f7`](https://github.com/duong-dt/rmm2/commit/f1f13f7eefc02ec3930040aa023ff7ee1905e90b))
 
-### Unknown
+- Adds PKGBUILD and zsh/bash completions
+  ([`82fcd31`](https://github.com/duong-dt/rmm2/commit/82fcd31b83ebf5ba4dcf0c2929854aec5816cb30))
 
-* Merge remote-tracking branch &#39;origin&#39; into v3 ([`a513f4b`](https://github.com/Spoons/rmm/commit/a513f4b07ba8dd986af54aa999ef53a4fc3863d7))
+- Adds platform detection to util
+  ([`de87adb`](https://github.com/duong-dt/rmm2/commit/de87adb32650b8fe55c63c295d54ec8071fdc0da))
 
+- Adds sync and remove commands
+  ([`edeb043`](https://github.com/duong-dt/rmm2/commit/edeb043702a68b588070dadb7232560d407cce8e))
 
-## v1.0.0 (2022-01-17)
+- Bump for 0.0.2 release
+  ([`05cc743`](https://github.com/duong-dt/rmm2/commit/05cc74359047bd6b5af8e81cbdb332d203ac2502))
 
-### Feature
+- Bump for v0.0.3 release
+  ([`3786089`](https://github.com/duong-dt/rmm2/commit/378608946b26d5e0b4cfc6415c5d45e5f3ecdc6a))
 
-* feat: add steamcmd auto download on windows ([`1f57028`](https://github.com/Spoons/rmm/commit/1f5702859e71fd5d07273d4f1e937eeb0e547ef6))
+- Check default RimWorld paths
+  ([`e9003f6`](https://github.com/duong-dt/rmm2/commit/e9003f6da608f20652ad0a1831a4cb36c20920b3))
 
-* feat: removed core ([`5b06868`](https://github.com/Spoons/rmm/commit/5b06868ea79a20a7e6aa91b20a28e3b5791fbfa6))
+- Complete PathFinder and remove V2 mod list
+  ([`631c373`](https://github.com/duong-dt/rmm2/commit/631c373573c05d8af89d06d00095adc732cbd9fa))
 
-* feat: update readme for v1.0 release ([`019f232`](https://github.com/Spoons/rmm/commit/019f232b831834a5f48e205941e944b68d94b95d))
+- Completed import and export cli
+  ([`5ed8a93`](https://github.com/duong-dt/rmm2/commit/5ed8a93aa8fbfcae475a0cc7988bdc8f925aa36f))
 
-### Fix
+- Completed workshop detail scraper
+  ([`bca4ef2`](https://github.com/duong-dt/rmm2/commit/bca4ef24ad6a80c44fee6eec0d4868f9af8448de))
 
-* fix: sanitize paths ([`fe99f31`](https://github.com/Spoons/rmm/commit/fe99f312f8f0c95aa25b18a7e2a2f820e93884ce))
+- Created manager class
+  ([`c44b13d`](https://github.com/duong-dt/rmm2/commit/c44b13d81c9bc7bdd20af5db63d129792b05d390))
 
-* fix: formatting ([`b0300b2`](https://github.com/Spoons/rmm/commit/b0300b29ccf2eecdc66dba59f0ce1ab51ca7a12b))
+- Further refinement on xml parsing
+  ([`d81252e`](https://github.com/duong-dt/rmm2/commit/d81252e8b71563244fd4137b3816cf54b8e662e6))
 
-* fix: compat for windows ([`3de1e1e`](https://github.com/Spoons/rmm/commit/3de1e1eb74fa55d1f4fbfbe7afa20967b8946e09))
+- Ignore files that are not mod directories
+  ([`e921b27`](https://github.com/duong-dt/rmm2/commit/e921b27eb1711ab9256ce40512dc9552532ad412))
 
+- Improve readme clarity
+  ([`4ee3ba8`](https://github.com/duong-dt/rmm2/commit/4ee3ba8475c39b6222dba3b2fa6842926cc3125f))
 
-## v0.1.1 (2022-01-16)
+- Improved cli and code refactor
+  ([`d8c6592`](https://github.com/duong-dt/rmm2/commit/d8c659243831fb5797a7028a8bf781ed8407a156))
 
-### Feature
+cli implemented with docopt-ng support for ignoring mods with '.rmm_ignore' added simplified
+  commands and parameters be more intuitive improved help output
 
-* feat: split core into modules ([`2756aa6`](https://github.com/Spoons/rmm/commit/2756aa6302ee7dab55b3d7dcb3f617f8126632ac))
+- Increment version for first release
+  ([`bbab5b7`](https://github.com/duong-dt/rmm2/commit/bbab5b7ba09f5341862840656042fca974f7d1f2))
 
-* feat: created manager class ([`0c9a47e`](https://github.com/Spoons/rmm/commit/0c9a47ef2e5df5e0acb545cb7d2aa0b1cc205632))
+- Make rmm a compliant module
+  ([`1cf6c2e`](https://github.com/duong-dt/rmm2/commit/1cf6c2edd2250c92d55e5882ace330341c445d95))
 
-* feat: update readme ([`c10892b`](https://github.com/Spoons/rmm/commit/c10892b8c59cd788a9829a799b11831653c87119))
+- Migrate command copies instead of sync
+  ([`971cd98`](https://github.com/duong-dt/rmm2/commit/971cd987dbcd67f93e5d3dde4e29df1ee7238111))
 
-* feat: simplify code, add export options ([`aa84322`](https://github.com/Spoons/rmm/commit/aa8432297a893ca30ffa3a8ad5be9f21362efb28))
+- Patch release
+  ([`d1a0ff4`](https://github.com/duong-dt/rmm2/commit/d1a0ff4523b5f108c78ddae90a6a4b46233c8d43))
 
-* feat: simplify front end code ([`6c5bea3`](https://github.com/Spoons/rmm/commit/6c5bea399e3cd60dc4e91ec810d2aca4e27ac075))
+- Refactor search
+  ([`32814cd`](https://github.com/duong-dt/rmm2/commit/32814cdfd66623052db88095313a93b3e96c7466))
 
-* feat: adds autosort ([`c3139b5`](https://github.com/Spoons/rmm/commit/c3139b5de35fc54299cc8fc81e0be7a5d7c2a611))
+- Removed core
+  ([`0760e28`](https://github.com/duong-dt/rmm2/commit/0760e2823ddef78e1db270e37fbf78260e29b1e9))
 
-* feat: adds config cli command ([`9addae3`](https://github.com/Spoons/rmm/commit/9addae3e15e2fe61fab6f10d0735f63c7866c1ee))
+- Replace with new core
+  ([`247a53c`](https://github.com/duong-dt/rmm2/commit/247a53ca43214481e7b1dd6f6d96a1e1bf36cbbf))
 
-* feat: adds curses multiselect window ([`e9627fa`](https://github.com/Spoons/rmm/commit/e9627fac62f2c6ff4580e77d46b8d679aaece461))
+- Rewrite of Mod and ModList handling code
+  ([`c34b917`](https://github.com/duong-dt/rmm2/commit/c34b917f10861aedfa7664fa2e621e3c4d9bb86e))
 
-* feat: refactor search ([`e989055`](https://github.com/Spoons/rmm/commit/e989055814f69ccc8de44e9a28dcb07367175734))
+- Selects temp directory atomically
+  ([`c7e17ae`](https://github.com/duong-dt/rmm2/commit/c7e17aeb0c55bd72669acb3f1a4931a45f4728c3))
 
-* feat: completed import and export cli ([`dd758d8`](https://github.com/Spoons/rmm/commit/dd758d8a45289a4aec2d8bb425c8a891ee952712))
+- Simplify code, add export options
+  ([`3cba157`](https://github.com/duong-dt/rmm2/commit/3cba157c669b25aef6613cbbc67378d70f8938d8))
 
-* feat: add update, export, and import cli ([`c508f34`](https://github.com/Spoons/rmm/commit/c508f347480d3e380da2c420408d9a3abaa18fab))
+- Simplify front end code
+  ([`cb65e67`](https://github.com/duong-dt/rmm2/commit/cb65e676ff8246936e040e198b60994e66fb63d2))
 
-* feat: split into modules ([`ea510b4`](https://github.com/Spoons/rmm/commit/ea510b4f687421c90e581e61c23f7039b18d4ded))
+- Sort cli functions
+  ([`fb3cb05`](https://github.com/duong-dt/rmm2/commit/fb3cb055d94d2361f2b8c2d1a1e35c37faafe9ac))
 
-* feat: adds sync and remove commands ([`084ac14`](https://github.com/Spoons/rmm/commit/084ac14999dc7a831c3b3efdd38c7a699af66a7c))
+- Split core into modules
+  ([`13443be`](https://github.com/duong-dt/rmm2/commit/13443be2a724e145527b4258182af34fbc5bbd2f))
 
-* feat: add sync cli and simplify steamcmd call ([`9d53f87`](https://github.com/Spoons/rmm/commit/9d53f87c1b8314481ef524c1cb330bd77a359d0c))
+- Split into modules
+  ([`bf8b1cd`](https://github.com/duong-dt/rmm2/commit/bf8b1cd4ba5a549a863ae4ef09980ad31179fcde))
 
-* feat: update readme with release info ([`d3071f5`](https://github.com/Spoons/rmm/commit/d3071f59b0ae9e3b3c9dfae76a312cf48a48b128))
+- Support for steam rimworld and workshop
+  ([`d1a0eef`](https://github.com/duong-dt/rmm2/commit/d1a0eef48b1a7456cbf1b85ea8a06fd3330ebb5a))
 
-* feat: replace with new core ([`ca0f3c0`](https://github.com/Spoons/rmm/commit/ca0f3c077d900f68b9ba7564a049b7828471262f))
+- Update change log. remove pkgbuild.
+  ([`70d5de8`](https://github.com/duong-dt/rmm2/commit/70d5de86490840b8c6888ae9a02fdcfc8654b858))
 
-* feat: adds cli ([`a392ac5`](https://github.com/Spoons/rmm/commit/a392ac53c3a9c8d75cc1607832fa4509f2208348))
+- Update changelog
+  ([`5420c16`](https://github.com/duong-dt/rmm2/commit/5420c161dee372785b067d70c862cb23756b19c2))
 
-### Fix
+- Update readme
+  ([`9ab27e4`](https://github.com/duong-dt/rmm2/commit/9ab27e4faf8b48788c8f50e5b06a1d00ce71548b))
 
-* fix: error with -p and -w arguments ([`9c7ef85`](https://github.com/Spoons/rmm/commit/9c7ef859102ac6809caf4e0778b574000028c487))
+- Update readme for python requirement
+  ([`9484dd5`](https://github.com/duong-dt/rmm2/commit/9484dd588096f32222fcc24483758c09337e4dd4))
 
-* fix: simplify import print ([`09fd73a`](https://github.com/Spoons/rmm/commit/09fd73a993d61500c3d58fb02edde6ff756861ce))
+- Update readme for v1.0 release
+  ([`c7db191`](https://github.com/duong-dt/rmm2/commit/c7db19124836db2e18e35bb6446efd7a818ba679))
 
-* fix: typing errors ([`1df3156`](https://github.com/Spoons/rmm/commit/1df315638a8c71d35d66b55f66488cd3f9daa950))
+- Update readme with release info
+  ([`24e3a0e`](https://github.com/duong-dt/rmm2/commit/24e3a0eacc1971c98432ca6717e2b637c9d5a4fe))
 
-* fix: improving autosort accuracy ([`81585f2`](https://github.com/Spoons/rmm/commit/81585f286709972aaa0a60a4c96c44438092f4f6))
+- Updates readme
+  ([`810f445`](https://github.com/duong-dt/rmm2/commit/810f4455253094d302efe81a208d940fdbdf7259))
 
-* fix: improved vector import ([`ded6daa`](https://github.com/Spoons/rmm/commit/ded6daac7fd41ca81341fde7bb758f01bcd14eae))
+- Use pbr for package management
+  ([`8dcad84`](https://github.com/duong-dt/rmm2/commit/8dcad84b4cb14776741958f92a21c284b54e0e8a))
 
-* fix: set pbfid to None when no pbfid file exists ([`7aabe4b`](https://github.com/Spoons/rmm/commit/7aabe4b0c42f78c54f2bf5bcdaaa312036ffab82))
+improved help output added MacOS default path
 
-* fix: check for str type on vectors ([`23bd748`](https://github.com/Spoons/rmm/commit/23bd74808bf9fcd6010700d4ccb97059ba6568a2))
+- V0.0.4 release
+  ([`1b7f1d5`](https://github.com/duong-dt/rmm2/commit/1b7f1d51d57bf1179bfd5130266085d95b4f2fcd))
 
-* fix: bounds error for zero arguments ([`cf9dfaa`](https://github.com/Spoons/rmm/commit/cf9dfaa659bba9393715c317b03850b4e4d52554))
-
-* fix: fix module ([`f3c00ef`](https://github.com/Spoons/rmm/commit/f3c00efc021d219e63b50a825be1cc110e735c74))
-
-* fix: ascii encode in publishedfileid ([`1d71166`](https://github.com/Spoons/rmm/commit/1d71166534e655314146ae42916986c8c86afa9b))
-
-* fix: cli parser issue ([`b158e54`](https://github.com/Spoons/rmm/commit/b158e547715be28bc77c10ccc7f1c9173208dcdd))
-
-
-## v0.1.0 (2022-01-04)
-
-### Feature
-
-* feat: update changelog ([`ba014c6`](https://github.com/Spoons/rmm/commit/ba014c66d81adfcb38f0a9c0dee4dd7c6f4c23dd))
-
-### Fix
-
-* fix: ignore non ascii characters in pubid file ([`45adc9e`](https://github.com/Spoons/rmm/commit/45adc9e3e9d135fa52eb7c897ca423bccc03e9b5))
-
-
-## v0.0.9 (2021-11-20)
-
-### Feature
-
-* feat: further refinement on xml parsing ([`622ca0c`](https://github.com/Spoons/rmm/commit/622ca0c10ca4cb60a22208836e8b522409d981fe))
-
-* feat: adds basic ModsConfig processing ([`bc70b85`](https://github.com/Spoons/rmm/commit/bc70b851626f295e4d2b9beef03ca5172ff07e3f))
-
-* feat: complete PathFinder and remove V2 mod list ([`cbdba13`](https://github.com/Spoons/rmm/commit/cbdba1347497d6a9b0eb033d937df6ae7e8bfd09))
-
-* feat: adds game and workshop finding methods ([`8f46e9d`](https://github.com/Spoons/rmm/commit/8f46e9d86f965af2949d9c1fe8059cd67c99be38))
-
-* feat: adds platform detection to util ([`399f5cf`](https://github.com/Spoons/rmm/commit/399f5cfad125cfd8721da863b9cfa5eac4cf81a9))
-
-* feat: adds basic mod test ([`c9c68a0`](https://github.com/Spoons/rmm/commit/c9c68a0822aae1cc2ada0a0acf564060ea0cbe22))
-
-* feat: completed workshop detail scraper ([`2e0d7f8`](https://github.com/Spoons/rmm/commit/2e0d7f88e3e4b39b0469f27a72b32677c69fe76d))
-
-* feat: adds list seralizers and ModList sequence ([`93ddf70`](https://github.com/Spoons/rmm/commit/93ddf70dbdf785af590bc3daeb530e04d7c874e0))
-
-* feat: rewrite of Mod and ModList handling code ([`08e85a9`](https://github.com/Spoons/rmm/commit/08e85a9f371c940885a8bab5abe8496414dc774d))
-
-* feat: migrate command copies instead of sync ([`be605dd`](https://github.com/Spoons/rmm/commit/be605dde99d148454f35a86e124314853d911210))
-
-* feat: update change log. remove pkgbuild. ([`e9be362`](https://github.com/Spoons/rmm/commit/e9be362f2a803f4b4f4a1fc77db1aee4bfae717f))
-
-### Fix
-
-* fix: added importlib.metadata dep ([`67917e9`](https://github.com/Spoons/rmm/commit/67917e9fdc79667183e7d0f942e5371bfbb28f06))
-
-* fix: improvements to modlist reading and writing ([`edc813c`](https://github.com/Spoons/rmm/commit/edc813c66231d08844401066026d0e24b369d78c))
-
-
-## v0.0.8 (2021-11-10)
-
-### Feature
-
-* feat: adds PKGBUILD and zsh/bash completions ([`2ed8a48`](https://github.com/Spoons/rmm/commit/2ed8a4875497d0f29e5944f0a8ebb4026ab8970d))
-
-* feat: add issue template ([`0ce5316`](https://github.com/Spoons/rmm/commit/0ce5316089bbbafce415b1993277ca85fdc98a39))
-
-* feat: add changelog and authors ([`5bfd1a9`](https://github.com/Spoons/rmm/commit/5bfd1a95a431504cb51359f886ce574547141e8d))
-
-### Fix
-
-* fix: exception on import command ([`2844127`](https://github.com/Spoons/rmm/commit/28441278528ca0e02f4b70b8627326bb6c6df4ab))
-
-* fix: removed more_magic for docopt (non-ng) compatibility ([`7b1943d`](https://github.com/Spoons/rmm/commit/7b1943de49f9665cb07a6a22c2162059f3271233))
-
-
-## v0.0.7 (2021-11-08)
-
-### Feature
-
-* feat: use pbr for package management
-
-improved help output
-added MacOS default path ([`cc7ba97`](https://github.com/Spoons/rmm/commit/cc7ba9701693e42d27b3244a082bbb2f8755f69d))
-
-### Fix
-
-* fix: correctly detect duplicated mods during sync ([`f95b76c`](https://github.com/Spoons/rmm/commit/f95b76c80be3cf577299e24c928a02859237b71a))
-
-* fix: mod pathing detection fix ([`5596107`](https://github.com/Spoons/rmm/commit/5596107e0643bd73f9f1ec35e2f05057cd46be3d))
-
-
-## v0.0.6 (2021-11-07)
-
-### Feature
-
-* feat: improve readme clarity ([`08b17f3`](https://github.com/Spoons/rmm/commit/08b17f35e8789dd03c0e237731423531a093f4cb))
-
-### Fix
-
-* fix: update_all_mods hotfix ([`7fc6810`](https://github.com/Spoons/rmm/commit/7fc6810f31048f87ce80716c70c4b92d2f8d5a4d))
-
-* fix: improve performance
-
-improve performance by using multiprocessing for reading in mods
-handle non mods in Mods directory
-improve steamapps auto detection
-network calls use urllib ([`9106769`](https://github.com/Spoons/rmm/commit/9106769f50f94b5161ef8f4e2247a1a311088435))
-
-* fix: multiple fixes for mod folder management
-
-avoid renaming existing mod folders
-avoid overwriting mods without a PublishedFileId without -f flag
-allows mods ignored with &#39;.rmm_ignore&#39; to be overwritten with -f flag ([`7b8295c`](https://github.com/Spoons/rmm/commit/7b8295cdc406d48d9dc70f76fbfd86ae09187b1d))
-
-* fix: add missing operations to help string ([`47beb9f`](https://github.com/Spoons/rmm/commit/47beb9f5c7695dbed43739f00924f9c722339094))
-
-### Unknown
-
-* v0.0.6 release ([`060984b`](https://github.com/Spoons/rmm/commit/060984b7fcb4146b8ee7fdd5a897bce09d78c38e))
-
-
-## v0.0.5 (2021-11-06)
-
-### Feature
-
-* feat: v0.0.5 release ([`24db44b`](https://github.com/Spoons/rmm/commit/24db44b7d8180ae77262b55356211f498446b7b9))
-
-* feat: improved cli and code refactor
-
-cli implemented with docopt-ng
-support for ignoring mods with &#39;.rmm_ignore&#39; added
-simplified commands and parameters be more intuitive
-improved help output ([`a0b19d3`](https://github.com/Spoons/rmm/commit/a0b19d3555eeb45568251f273b430ba5a27ff6c9))
-
-
-## v0.0.4 (2021-11-01)
-
-### Feature
-
-* feat: v0.0.4 release ([`a007d88`](https://github.com/Spoons/rmm/commit/a007d88916834ce48698a4736a64c445a334a15e))
-
-* feat: add migrate and version command ([`8165d8b`](https://github.com/Spoons/rmm/commit/8165d8bc914055ea5221c92efbe7df6588ad6465))
-
-### Fix
-
-* fix: remove debug print during collision detection ([`52289f5`](https://github.com/Spoons/rmm/commit/52289f53e06e315d76e1e8c1aa573e826aa0924a))
-
-### Unknown
-
-* feat[readme]: add RMM_WORKSHOP_PATH info ([`eac9ece`](https://github.com/Spoons/rmm/commit/eac9ecea795703fd6a859da21b574a65e72e731b))
-
-
-## v0.0.3 (2021-10-17)
-
-### Feature
-
-* feat: bump for v0.0.3 release ([`c94c2b6`](https://github.com/Spoons/rmm/commit/c94c2b6da8f6f8c49273de774d0203184dc06cf9))
-
-* feat: selects temp directory atomically ([`8e0e11a`](https://github.com/Spoons/rmm/commit/8e0e11acadeb73d5b4bc4aa199a5df058edff2d1))
-
-* feat: support for steam rimworld and workshop ([`c6ea857`](https://github.com/Spoons/rmm/commit/c6ea857f5cbdf7f37107b68b4074b9e139adb616))
-
-
-## v0.0.2 (2021-10-16)
-
-### Feature
-
-* feat: bump for 0.0.2 release ([`fb7fd16`](https://github.com/Spoons/rmm/commit/fb7fd16f044efe397e660120478b9586c41e0541))
-
-* feat: patch release ([`24c05d4`](https://github.com/Spoons/rmm/commit/24c05d47bb8974f8bce7f263c76513e6d4fd0cd7))
-
-### Fix
-
-* fix: installation logic, ui hang, file performance
-
-Improves mod install and remove performance.
-Fixes query and search cmd hang on empty results. ([`90f36f1`](https://github.com/Spoons/rmm/commit/90f36f141acb4d4918f1e5ce5d811893e9d65cf3))
-
-### Unknown
-
-* fix[core]: fixes multiple issues regarding cache
-
-Fix issue where a cached mod could be re-installed during all package
-update.
-Fix issue where mod using non steam id naming structure could be installed twice.
-Code cleanup and refactor of installation logic. ([`df8849f`](https://github.com/Spoons/rmm/commit/df8849f9cd84ea154e976aa102937ebfe3679d80))
-
-* fix[readme]: install package name match pypi ([`f36ab08`](https://github.com/Spoons/rmm/commit/f36ab089b3777ee4a68cff83f8d3ade4828422d6))
-
-
-## v0.0.1 (2021-10-05)
-
-### Feature
-
-* feat: increment version for first release ([`bbd35a6`](https://github.com/Spoons/rmm/commit/bbd35a621822c86f82e70c0d11ca80e6b861c1f7))
-
-* feat: add mod name and author to mod lists ([`923a032`](https://github.com/Spoons/rmm/commit/923a0328e99fa57a3ae4096fb2c39df3ba16a567))
-
-* feat: add variable arguments to sync commands ([`d6059b6`](https://github.com/Spoons/rmm/commit/d6059b64b7422af57150e9a9e858cb8a2982ba65))
-
-* feat: check default RimWorld paths ([`a524ea7`](https://github.com/Spoons/rmm/commit/a524ea734e6bb9142860232d102876ca4b8911b6))
-
-* feat: ignore files that are not mod directories ([`a3ed332`](https://github.com/Spoons/rmm/commit/a3ed332066bc0677d8d0960b8f7122e34cf57aa9))
-
-* feat: add setuptools packaging
-
-Add setuptools metadata
-ReadMe updated to reflect new packaging directions. ([`d70f659`](https://github.com/Spoons/rmm/commit/d70f659124011b94b89fe1ca5d1cba6b22cb9a9e))
-
-* feat: add README and requirements.txt ([`0d3237b`](https://github.com/Spoons/rmm/commit/0d3237b7215bd886203e0e287d25e8deec55c62d))
-
-* feat: add package cache seperation and mod list importing ([`be552ec`](https://github.com/Spoons/rmm/commit/be552ece751c16fbb61b876bb622849d10e3d4c3))
-
-* feat: add interactive sync and search command ([`ffff00e`](https://github.com/Spoons/rmm/commit/ffff00ea0c417e1e467f7389afa9f45c014e6b93))
-
-* feat: add command line interface and usage ([`7d3e535`](https://github.com/Spoons/rmm/commit/7d3e53593ef29400a111bd8e1f28cfd774bb15b4))
-
-* feat: add workshop mod download functionality ([`52d0ca8`](https://github.com/Spoons/rmm/commit/52d0ca8082ec5433156c97cce7439889e6ae6d02))
-
-### Fix
-
-* fix: corrects setuptools runtime deps ([`e802902`](https://github.com/Spoons/rmm/commit/e802902480884791bc85e8e5854609ffdb6c20d0))
-
-* fix: list not printing table ([`c6a07cc`](https://github.com/Spoons/rmm/commit/c6a07cc6682e3571cac775f015a38722ebb13a48))
-
-* fix: add deps to packaging ([`2f0709b`](https://github.com/Spoons/rmm/commit/2f0709b5218b87832a2c4da548d1414748b7ada3))
-
-* fix: update README ([`6cdb2a5`](https://github.com/Spoons/rmm/commit/6cdb2a5ae1cb54a4a3aebd5d9c40455b6e3f9652))
-
-* fix: style code ([`6cf0bc9`](https://github.com/Spoons/rmm/commit/6cf0bc90ffba866a2a8abd9f176a53e1c403b733))
-
-* fix: require RMM_MOD to be set ([`6d6e0c2`](https://github.com/Spoons/rmm/commit/6d6e0c2850178b16ea899fed24e59c4be4d5ee17))
-
-* fix: validate interactive sync package selection ([`13887c0`](https://github.com/Spoons/rmm/commit/13887c0be056e7b236527139740adfcef5b882da))
-
-### Unknown
-
-* fix[doc]: fix incorrect install documentation ([`fbcbc18`](https://github.com/Spoons/rmm/commit/fbcbc1826b4c148132a107b26c2efbe1a2044c38))
-
-* feat[cli]: add query (local search) ([`3aa5afb`](https://github.com/Spoons/rmm/commit/3aa5afbf695de4959ce5d8208be4555d73a867c7))
-
-* feat[cli]: add mod removal ([`35aa23c`](https://github.com/Spoons/rmm/commit/35aa23c94dd47556c1123608a60764dce95edb6c))
+- V0.0.5 release
+  ([`1c9fb5f`](https://github.com/duong-dt/rmm2/commit/1c9fb5f0b2c47da3696d812fd7b16dd43ceb36fd))
