@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v1.1.4 (2025-05-14)
+
+### Bug Fixes
+
+- Fix publish workflow, remove locked on uv
+  ([`694bbf7`](https://github.com/duong-dt/rmm2/commit/694bbf7f408fd2d7b492221f60c0d4789c68dcd6))
+
+
 ## v1.1.3 (2025-05-14)
 
 ### Bug Fixes
