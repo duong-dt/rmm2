@@ -88,3 +88,8 @@ remove-testing:
 [group('release')]
 release: static-check
   python-semantic-release version
+
+[group('release')]
+[private]
+pre-release:
+  uv lock
