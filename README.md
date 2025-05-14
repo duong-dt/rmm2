@@ -1,12 +1,10 @@
 <!-- markdownlint-disable MD013 -->
 # RMM2: RimWorld Mod Manager (forked from [rmm-spoons](https://github.com/Spoons/rmm) )
 
-[//]: # ([![RMM]&#40;https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/rmm-spoons/main/assets/badge/v2.json&#41;]&#40;https://github.com/spoons/rmm&#41;)
 [![image](https://img.shields.io/pypi/v/rmm2.svg)](https://pypi.python.org/pypi/rmm2)
 [![image](https://img.shields.io/pypi/l/rmm2.svg)](https://pypi.python.org/pypi/rmm2)
-[![image](https://img.shields.io/pypi/pyversions/rmm2.svg)](https://pypi.python.org/pypi/rmm2)
+[![image](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fduong-dt%2Frmm2%2Fmaster%2Fpyproject.toml)](https://pypi.python.org/pypi/rmm2)
 
-[//]: # ([![Actions status]&#40;https://github.com/spoons/rmm/workflows/CI/badge.svg&#41;]&#40;https://github.com/spoons/rmm/actions&#41;)
 
 A mod manager for RimWorld.
 
