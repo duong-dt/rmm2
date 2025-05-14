@@ -1,6 +1,20 @@
 # CHANGELOG
 
 
+## v1.1.5 (2025-05-14)
+
+### Documentation
+
+- Update description
+  ([`e52633a`](https://github.com/duong-dt/rmm2/commit/e52633a21bb164104887e41daea67864947dd9fd))
+
+- Update python-version badge
+  ([`b8dd37a`](https://github.com/duong-dt/rmm2/commit/b8dd37a92350e31bf7cc3d45392836d986480477))
+
+- Workaround for pypi author list display
+  ([`4d4fc27`](https://github.com/duong-dt/rmm2/commit/4d4fc2763d2d74ca610b4e7ebe13d78ca43d4d94))
+
+
 ## v1.1.4 (2025-05-14)
 
 ### Bug Fixes
