@@ -94,3 +94,4 @@ release:
 [private]
 pre-release:
   uv lock --prerelease 'if-necessary'
+  git add uv.lock
