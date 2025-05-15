@@ -7,9 +7,6 @@ resolution-markers = [
     "python_full_version < '3.9'",
 ]
 
-[options]
-prerelease-mode = "if-necessary"
-
 [[package]]
 name = "beautifulsoup4"
 version = "4.13.4"

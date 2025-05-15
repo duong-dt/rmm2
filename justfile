@@ -93,5 +93,5 @@ release:
 [group('release')]
 [private]
 pre-release:
-  uv lock --prerelease 'if-necessary'
+  uv lock --prerelease 'if-necessary-or-explicit'
   git add uv.lock
