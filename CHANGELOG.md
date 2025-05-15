@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v1.1.7 (2025-05-15)
+
+### Bug Fixes
+
+- Fix uv.lock out of sync
+  ([`e990950`](https://github.com/duong-dt/rmm2/commit/e9909509d9c6d592a1d73f557a9f9e11de16e613))
+
+
 ## v1.1.6 (2025-05-15)
 
 ### Chores
