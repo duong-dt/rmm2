@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v1.1.8 (2025-05-15)
+
+### Bug Fixes
+
+- Fix uv prerelease mode not same with gha
+  ([`147d3ed`](https://github.com/duong-dt/rmm2/commit/147d3edbe88b686d6e1461ef0b25e1a6c6fbc66b))
+
+
 ## v1.1.7 (2025-05-15)
 
 ### Bug Fixes
