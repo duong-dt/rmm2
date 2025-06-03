@@ -101,7 +101,12 @@ def mods_config_dec(func):
 
 
 def _interactive_query(manager: Manager, term: str, verb: str) -> list[Mod] | None:
-    search_result = manager.search_installed(term)
+    if verb == "enable":
+        search_result = manager.disabled_mods()
+    elif verb == "disable":
+        search_result = manager.enabled_mods()
+    else:
+        search_result = manager.search_installed(term)
     if not search_result:
         print(f"No packages matching {term}")
         return None
