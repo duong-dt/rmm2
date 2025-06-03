@@ -5,7 +5,7 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import cast
+from typing import Callable, cast
 
 from tabulate import tabulate
 
@@ -100,11 +100,11 @@ def mods_config_dec(func):
     return wrapper_func
 
 
-def _interactive_query(manager: Manager, term: str, verb: str):
+def _interactive_query(manager: Manager, term: str, verb: str) -> list[Mod] | None:
     search_result = manager.search_installed(term)
     if not search_result:
         print(f"No packages matching {term}")
-        return False
+        return None
 
     print(tabulate_mod_or_wr(search_result, reverse=True, numbered=True))
     print(f"Packages to {verb} (eg: 1,3,5-9)")
@@ -137,7 +137,7 @@ def _cli_parse_modlist(args):
     return queue
 
 
-def _interactive_selection(args: list[str], manager: Manager, verb: str, f):
+def _interactive_selection(args: list[str], manager: Manager, verb: str, f: Callable) -> None:
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
 
@@ -263,12 +263,12 @@ def search(args: list[str], manager: Manager):
     print(tabulate_mod_or_wr(results))
 
 
-def capture_range(length: int):
+def capture_range(length: int) -> list[int]:
     if length == 0:
         return None
     while True:
         try:
-            strInput = input()
+            strInput = input().strip()
             selection = capture_indexes(strInput)
             for n in selection:
                 if n > length or n <= 0:
@@ -283,9 +283,9 @@ def capture_range(length: int):
 
 
 # get mod index from input by space separated list of numbers or ranges like 1-3
-def capture_indexes(strInput: str):
+def capture_indexes(strInput: str) -> list[int]:
     if not strInput:
-        return None
+        return list()
     selection = []
     for s in strInput.split(" "):
         if "-" in s:
