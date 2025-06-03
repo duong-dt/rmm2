@@ -103,15 +103,13 @@ def mods_config_dec(func):
 def _interactive_query(manager: Manager, term: str, verb: str):
     search_result = manager.search_installed(term)
     if not search_result:
-        print(f"No packages matching {search_term}")
+        print(f"No packages matching {term}")
         return False
 
     print(tabulate_mod_or_wr(search_result, reverse=True, numbered=True))
     print(f"Packages to {verb} (eg: 1,3,5-9)")
 
     selection = capture_range(len(search_result))
-    for n in selection:
-        print(n)
     if selection:
         return [search_result[m - 1] for m in selection]
     else:
@@ -120,6 +118,7 @@ def _interactive_query(manager: Manager, term: str, verb: str):
 
 
 def _interactive_verify(mods: list[Mod], verb: str):
+    print("Selected mods:")
     for m in mods:
         print(m.title())
 
@@ -159,9 +158,10 @@ def _interactive_selection(args: list[str], manager: Manager, verb: str, f):
 
     if not queue:
         exit(0)
-    _interactive_verify(queue, verb)
-    f(queue)
-
+    if _interactive_verify(queue, verb):
+        f(queue)
+        if verb == "enable" or verb == "disable":
+            print("\nRecommend to use auto sort")
 
 def _expand_ranges(s: str) -> str:
     return re.sub(
@@ -328,13 +328,11 @@ def remove(args: list[str], manager: Manager):
 @mods_config_dec
 def enable(args: list[str], manager: Manager):
     _interactive_selection(args, manager, "enable", manager.enable_mods)
-    print("\nRecommend to use auto sort")
 
 
 @mods_config_dec
 def disable(args: list[str], manager: Manager):
     _interactive_selection(args, manager, "disable", manager.disable_mods)
-    print("\nRecommend to use auto sort")
 
 
 @mods_config_dec
