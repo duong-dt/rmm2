@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from functools import cache
 import os
 import re
 import subprocess
@@ -8,9 +9,10 @@ import urllib.error
 import urllib.request
 import zipfile
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Any
 
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 
 from . import util
 from .mod import Mod, ModFolder
@@ -127,18 +129,18 @@ class SteamDownloader:
 class WorkshopResult:
     def __init__(
         self,
-        steamid,
-        name=None,
-        author=None,
-        description=None,
-        update_time=None,
-        size=None,
-        # num_rating=None,
-        rating=None,
-        create_time=None,
-        num_ratings=None,
-    ):
-        self.steamid = steamid
+        steamid: int,
+        name: str = "",
+        author: str = "",
+        description: str = "",
+        update_time: str = "",
+        size: str = "",
+        rating: str = "",
+        create_time: str = "",
+        num_ratings: str = "",
+        required_items: dict[str, Any]=dict(),
+    ) -> None:
+        self._steamid = steamid
         self.name = name
         self.author = author
         self.description = description
@@ -148,7 +150,7 @@ class WorkshopResult:
         self.num_ratings = num_ratings
         self.rating = rating
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "\n".join(
             [
                 prop + ": " + str(getattr(self, prop))
@@ -157,13 +159,24 @@ class WorkshopResult:
             ]
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.__str__()
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, WorkshopResult):
             raise NotImplementedError
-        return self.steamid == other.steamid
+        return self._steamid == other._steamid
+
+    def __hash__(self) -> int:
+        return hash(self._steamid)
+
+    @property
+    def steamid(self) -> int:
+        return self._steamid
+
+    @steamid.setter
+    def steamid(self, *args) -> None:
+        raise AttributeError("WorkshopResult.steamid is immutable")
 
 
 class WorkshopWebScraper:
@@ -192,37 +205,52 @@ class WorkshopWebScraper:
                 raise e
 
     @classmethod
-    def detail(cls, steamid: int) -> WorkshopResult:
+    @cache
+    def detail(cls, steamid: int, wsResult: WorkshopResult | None = None) -> WorkshopResult:
         results = BeautifulSoup(
             cls._request(cls.detail_query, str(steamid)),
             "html.parser",
         )
+        if wsResult is None:
+            wsResult = WorkshopResult(steamid)
 
         details = results.find_all("div", class_="detailsStatRight")
+
+        # size of mods
         try:
             size = details[0].get_text()
+            wsResult.size = size
         except IndexError:
-            size = None
+            pass
+        # create time
         try:
             created = details[1].get_text()
+            wsResult.create_time = created
         except IndexError:
-            created = None
+            pass
+        # update time
         try:
             updated = details[2].get_text()
+            wsResult.update_time = updated
         except IndexError:
-            updated = None
+            pass
+        # description
         try:
             description = results.find("div", class_="workshopItemDescription")
             if description:
                 description = description.get_text()
+                wsResult.description = description
         except AttributeError:
-            description = None
+            pass
+        # no. of rating
         try:
             num_ratings = results.find("div", class_="numRatings")
             if num_ratings:
                 num_ratings = num_ratings.get_text()
+                wsResult.num_ratings = num_ratings
         except AttributeError:
-            num_ratings = None
+            pass
+        # rating
         try:
             rating = re.search(
                 "([1-5])(?:-star)",
@@ -230,18 +258,25 @@ class WorkshopWebScraper:
             )
             if rating:
                 rating = rating.group(1)
+                wsResult.rating = rating
         except AttributeError:
-            rating = None
+            pass
 
-        return WorkshopResult(
-            steamid,
-            size=size,
-            create_time=created,
-            update_time=updated,
-            description=description,
-            # num_rating=num_ratings,
-            rating=rating,
-        )
+        # required item: list[WorkshopResult]
+        required_mods = list()
+        reqItms = results.find("div", id="RequiredItems")
+        if reqItms:
+            for itm in reqItms.children:
+                if isinstance(itm, Tag):
+                    modid = int(
+                        re.search(r"\d+", itm["href"]).group()
+                    )
+                    # adding (*) at beginning of name to indicate a dependencies
+                    modname = "(*) " + itm.find("div").get_text().strip()
+                    required_mods.append(WorkshopResult(modid, name=modname))
+        wsResult.required_items = required_mods
+
+        return wsResult
 
     @classmethod
     def search(cls, term: str, reverse: bool = False) -> List[WorkshopResult]:

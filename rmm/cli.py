@@ -5,7 +5,7 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Callable, cast
+from typing import Callable, Iterable, cast
 
 from tabulate import tabulate
 
@@ -314,14 +314,24 @@ def sync(args: list[str], manager: Manager):
     selection = capture_range(len(results))
     if not selection:
         exit(0)
-    queue = list(reversed([results[m - 1] for m in selection]))
+    queue = set([results[m - 1] for m in selection])
+
+    def get_deps(steamid: int) -> Iterable[WorkshopResult]:
+        ret = set()
+        itm = WorkshopWebScraper.detail(steamid)
+        ret = ret.union(itm.required_items)
+        for it in itm.required_items:
+            ret = ret.union(get_deps(it.steamid))
+        return ret
+
+    for q in queue.copy():
+        queue = queue.union(get_deps(q.steamid))
+
     print(
         "Package(s): \n{} \n\nwill be installed.".format(
-            "  \n".join([f"{m.name} by {m.author}" for m in queue])
-        ),
-        end="",
+            "  \n".join([f"{m.name} {"by "+m.author if m.author else ""}" for m in sorted(queue, key = lambda q: str(q))])
+        )
     )
-    print()
 
     manager.sync_mods(queue)
 
