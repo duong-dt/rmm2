@@ -242,7 +242,7 @@ def help(args: list[str], manager: Manager):
 
 def version(args: list[str], manager: Manager):
     try:
-        print(importlib.metadata.version("rmm-spoons"))
+        print(importlib.metadata.version("rmm2"))
     except importlib.metadata.PackageNotFoundError:
         print("version unknown")
 
