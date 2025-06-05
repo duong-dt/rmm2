@@ -1,6 +1,28 @@
 # CHANGELOG
 
 
+## v1.2.0 (2025-06-05)
+
+### Bug Fixes
+
+- Improve range selection handling
+  ([`7704cb9`](https://github.com/duong-dt/rmm2/commit/7704cb9dcfc6019595c2e3e88ffb05dca83bc95f))
+
+### Features
+
+- Add required items to mod details
+  ([`156a0c8`](https://github.com/duong-dt/rmm2/commit/156a0c81734e61ab7529a4ee02ae1ca244e3c67e))
+
+- Only list relevant mods during enable/disable
+  ([`32b1730`](https://github.com/duong-dt/rmm2/commit/32b173073c52b404965411b26b089574cc2ba3bd))
+
+- Only print name of selected mods
+  ([`828cd70`](https://github.com/duong-dt/rmm2/commit/828cd70b5ae3b6e1b365cead63d98d0ce1ceef6b))
+
+- **sync**: Auto sync dependencies
+  ([`fee1628`](https://github.com/duong-dt/rmm2/commit/fee16285f1373ef895d597603c96fa5a4a0fb3d8))
+
+
 ## v1.1.8 (2025-05-15)
 
 ### Bug Fixes
