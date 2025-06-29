@@ -86,7 +86,7 @@ remove-testing:
 
 # Release
 [group('release')]
-release:
+release: static-check
   git diff --exit-code --quiet
   python-semantic-release --strict version
 
