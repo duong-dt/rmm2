@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from functools import cache
 import os
 import re
 import subprocess
@@ -8,14 +7,15 @@ import tempfile
 import urllib.error
 import urllib.request
 import zipfile
+from functools import cache
 from pathlib import Path
-from typing import List, Tuple, Any
+from typing import Any, List, Tuple
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
-from . import util
-from .mod import Mod, ModFolder
+from rmm import util
+from rmm.mod import Mod, ModFolder
 
 STEAMCMD_WINDOWS_URL = "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip"
 
@@ -81,7 +81,7 @@ class SteamDownloader:
         return (home_path, mod_path)
 
     @staticmethod
-    def download(mods: List[int]) -> Tuple[List[Mod], Path]:
+    def download(mods: list[int]) -> Tuple[list[Mod], Path]:
         home_path, mod_path = SteamDownloader.find_path()
 
         if not home_path:
@@ -279,7 +279,7 @@ class WorkshopWebScraper:
         return wsResult
 
     @classmethod
-    def search(cls, term: str, reverse: bool = False) -> List[WorkshopResult]:
+    def search(cls, term: str, reverse: bool = False) -> list[WorkshopResult]:
         page_result = BeautifulSoup(
             cls._request(cls.index_query, term),
             "html.parser",

@@ -1,13 +1,11 @@
-#!/usr/bin/env python3
-
 from pathlib import Path
 from typing import List, Union
 
-from . import util
-from .config import Config
-from .mod import EXPANSION_PACKAGES, Mod, ModFolder
-from .modsconfig import ModsConfig
-from .steam import SteamDownloader, WorkshopResult
+from rmm import util
+from rmm.config import Config
+from rmm.mod import EXPANSION_PACKAGES, Mod, ModFolder
+from rmm.modsconfig import ModsConfig
+from rmm.steam import SteamDownloader, WorkshopResult
 
 
 class Manager:
@@ -62,13 +60,13 @@ class Manager:
             if self.config.USE_HUMAN_NAMES and m.packageid and pid_path.exists():
                 util.remove(pid_path)
 
-    def remove_mods(self, queue: List[Mod]):
+    def remove_mods(self, queue: list[Mod]) -> None:
         for mod in queue:
             if isinstance(mod, WorkshopResult):
                 mod = Mod.create_from_workshorp_result(mod)
             self.remove_mod(mod)
 
-    def sync_mods(self, queue: Union[List[Mod], List[WorkshopResult]]):
+    def sync_mods(self, queue: list[Mod] | list[WorkshopResult]) -> None:
         steam_mods, steam_cache_path = SteamDownloader.download(
             [mod.steamid for mod in queue if mod.steamid]
         )
@@ -93,10 +91,10 @@ class Manager:
             if success:
                 print(f"Installed {mod.title()}")
 
-    def _mod_config_state(self, mods):
+    def _mod_config_state(self, mods: dict[str, Mod]) -> list[Mod]:
         return [m for _, m in self._mod_config_state_dict(mods).items()]
 
-    def _mod_config_state_dict(self, mods):
+    def _mod_config_state_dict(self, mods: dict[str, Mod]) -> dict[str, Mod]:
         if self.modsconfig:
             enabled_mods = self._enabled_mod_pids()
             for k, v in mods.items():
@@ -106,7 +104,7 @@ class Manager:
                     v.enabled = False
         return mods
 
-    def installed_mods(self):
+    def installed_mods(self) -> list[Mod]:
         mods = ModFolder.read_dict(self.config.mod_path)
         return self._mod_config_state(mods)
 

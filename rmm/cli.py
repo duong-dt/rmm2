@@ -9,14 +9,14 @@ from typing import Callable, Iterable, cast
 
 from tabulate import tabulate
 
-from . import util
-from .config import Config
-from .exception import InvalidSelectionException
-from .manager import Manager
-from .mod import Mod
-from .modlist import ModListFile, ModListV2Format
-from .path import PathFinder
-from .steam import WorkshopResult, WorkshopWebScraper
+from rmm import util
+from rmm.config import Config
+from rmm.exception import InvalidSelectionException
+from rmm.manager import Manager
+from rmm.mod import Mod
+from rmm.modlist import ModListFile, ModListV2Format
+from rmm.path import PathFinder
+from rmm.steam import WorkshopResult, WorkshopWebScraper
 
 USAGE = """
 RimWorld Mod Manager
@@ -302,7 +302,7 @@ def capture_indexes(strInput: str) -> list[int]:
 
 
 @mods_config_dec
-def sync(args: list[str], manager: Manager):
+def sync(args: list[str], manager: Manager) -> None:
     joined_args = " ".join(args[1:])
     results = WorkshopWebScraper.search(joined_args)
     print(
@@ -327,13 +327,22 @@ def sync(args: list[str], manager: Manager):
     for q in queue.copy():
         queue = queue.union(get_deps(q.steamid))
 
-    print(
-        "Package(s): \n{} \n\nwill be installed.".format(
-            "  \n".join([f"{m.name} {"by "+m.author if m.author else ""}" for m in sorted(queue, key = lambda q: str(q))])
-        )
-    )
+    exist_mods = manager.installed_mods()
+    # remove existing mod(s) from queue
+    for m in queue.copy():
+        if m.steamid in exist_mods:
+            queue.discard(m)
 
-    manager.sync_mods(queue)
+    if queue:
+        print(
+            "Package(s): \n{} \n\nwill be installed.".format(
+                "  \n".join([f"{m.name} {"by "+m.author if m.author else ""}" for m in sorted(queue, key = lambda q: str(q))])
+            )
+        )
+
+        manager.sync_mods(queue)
+    else:
+        print("Selected package(s) are already installed")
 
 
 def remove(args: list[str], manager: Manager):

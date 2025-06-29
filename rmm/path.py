@@ -83,7 +83,7 @@ class PathFinder:
                 )
 
     @staticmethod
-    def _search_defaults(defaults: List[str], f) -> Optional[Path]:
+    def _search_defaults(defaults: list[str], f) -> Optional[Path]:
         platform = util.platform()
         for path in [n[0] for n in defaults if n[1] == platform]:
             path = util.sanitize_path(path)

@@ -22,7 +22,7 @@ class ModsConfig:
         self.root = self.element_tree.getroot()
         try:
             enabled = cast(
-                List[str],
+                list[str],
                 util.list_grab("activeMods", self.root),
             )
             # self.mods = [Mod(packageid=pid) for pid in enabled]
@@ -193,7 +193,7 @@ class ModsConfig:
                 DG.remove_edge(*cycle[0])
                 count += 1
 
-    def verify_state(self, mods: List[Mod]):
+    def verify_state(self, mods: list[Mod]):
         if isinstance(mods, list):
             populated_mods = {m.packageid: m for m in mods if m.packageid in self.mods}
         elif isinstance(mods, dict):

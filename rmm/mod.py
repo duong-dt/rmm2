@@ -1,16 +1,15 @@
-#!/usr/bin/env python3
-
 from __future__ import annotations
 
-
+import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from multiprocessing import Pool
 from pathlib import Path
-from typing import Optional, List, Union, cast
+from typing import TYPE_CHECKING, Optional, Union, cast
 
-import xml.etree.ElementTree as ET
+from rmm import util
 
-from . import util
+if TYPE_CHECKING:
+    from rmm.steam import WorkshopResult
 
 DEBUG = False
 
@@ -18,13 +17,13 @@ DEBUG = False
 @dataclass
 class Mod:
     packageid: Optional[str] = field(default_factory=str)
-    before: List[str] = field(default_factory=list)
-    after: List[str] = field(default_factory=list)
-    incompatible: List[str] = field(default_factory=list)
+    before: list[str] = field(default_factory=list)
+    after: list[str] = field(default_factory=list)
+    incompatible: list[str] = field(default_factory=list)
     dirname: Optional[Path] = None
     author: str = "Unknown"
     name: Optional[str] = None
-    versions: List[str] = field(default_factory=list)
+    versions: list[str] = field(default_factory=list)
     steamid: Optional[int] = None
     ignored: bool = False
     repo_url: Optional[str] = None
@@ -59,11 +58,11 @@ class Mod:
         return hash(self.packageid)
 
     @staticmethod
-    def create_from_workshop_result(wr: "WorkshopResult") -> "Mod":
+    def create_from_workshop_result(wr: WorkshopResult) -> Mod:
         return Mod(steamid=wr.steamid, name=wr.name, author=wr.author)
 
     @staticmethod
-    def list_to_dict(mods: List["Mod"]) -> dict:
+    def list_to_dict(mods: list[Mod]) -> dict[str, Mod]:
         return {mod.packageid: mod for mod in mods if mod.packageid}
 
     @staticmethod
@@ -165,7 +164,7 @@ class ModFolder:
         return mods
 
     @staticmethod
-    def read_dict(path: Path):
+    def read_dict(path: Path) -> dict[str, Mod]:
         return Mod.list_to_dict(ModFolder.read(path))
 
     @staticmethod

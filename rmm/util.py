@@ -62,10 +62,10 @@ def list_loop_exclusion(a: list, b: list) -> list:
     return [value for value in a if value not in b]
 
 
-def list_grab(element: str, root: ET.Element) -> Optional[List[str]]:
+def list_grab(element: str, root: ET.Element) -> Optional[list[str]]:
     try:
         return cast(
-            Optional[List[str]],
+            Optional[list[str]],
             [n.text for n in cast(ET.Element, root.find(element)).findall("li")],
         )
     except AttributeError:
