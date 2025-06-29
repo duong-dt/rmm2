@@ -9,10 +9,10 @@ from typing import Optional
 class Config:
     def __init__(
         self,
-        path: Path = None,
+        path: Optional[Path] = None,
         workshop_path: Optional[Path] = None,
-        config_path: Path = None,
-    ):
+        config_path: Optional[Path] = None,
+    ) -> None:
         self.mod_path = path
         self.workshop_path = workshop_path
         self.config_path = config_path

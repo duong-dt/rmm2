@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-
-from functools import cache
 import os
 import re
 import subprocess
@@ -8,21 +5,22 @@ import tempfile
 import urllib.error
 import urllib.request
 import zipfile
+from functools import cache
 from pathlib import Path
-from typing import List, Tuple, Any
+from typing import Any, Tuple
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
-from . import util
-from .mod import Mod, ModFolder
+from rmm import util
+from rmm.mod import Mod, ModFolder
 
 STEAMCMD_WINDOWS_URL = "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip"
 
 
 class SteamDownloader:
     @staticmethod
-    def download_steamcmd_windows(path):
+    def download_steamcmd_windows(path: Path) -> None:
         download_path = path / "steamcmd.zip"
         max_retries = 10
         print("Installing SteamCMD")
@@ -46,7 +44,7 @@ class SteamDownloader:
             pass
 
     @staticmethod
-    def find_path():
+    def find_path() -> tuple[Path, Path]:
         home_path = None
         mod_path = None
         try:
@@ -63,7 +61,7 @@ class SteamDownloader:
 
         if not home_path:
             home_path = Path(tempfile.mkdtemp(prefix="rmm-"))
-            with open((home_path / ".rmm"), "w"):
+            with (home_path / ".rmm").open("w"):
                 pass
 
         if not home_path:
@@ -73,15 +71,14 @@ class SteamDownloader:
             mod_path = home_path / "SteamApps/workshop/content/294100/"
         elif util.platform() == "darwin":
             mod_path = (
-                home_path
-                / "Library/Application Support/Steam/SteamApps/workshop/content/294100/"
+                home_path / "Library/Application Support/Steam/SteamApps/workshop/content/294100/"
             )
         else:
             mod_path = home_path / util.extract_download_path()
         return (home_path, mod_path)
 
     @staticmethod
-    def download(mods: List[int]) -> Tuple[List[Mod], Path]:
+    def download(mods: list[int]) -> Tuple[list[Mod], Path]:
         home_path, mod_path = SteamDownloader.find_path()
 
         if not home_path:
@@ -93,17 +90,12 @@ class SteamDownloader:
             if not (home_path / "steamcmd.exe").exists():
                 SteamDownloader.download_steamcmd_windows(home_path)
 
-            query = "steamcmd +login anonymous {} +quit".format(
-                workshop_item_arg + workshop_item_arg.join(str(m) for m in mods),
-            )
+            query = f"steamcmd +login anonymous {workshop_item_arg + workshop_item_arg.join(str(m) for m in mods)} +quit"
             print()
             for n in util.execute(query):
                 print(n, end="")
         else:
-            query = 'env HOME="{}" steamcmd +login anonymous {} +quit >&2'.format(
-                str(home_path),
-                workshop_item_arg + workshop_item_arg.join(str(m) for m in mods),
-            )
+            query = f'env HOME="{home_path!s}" steamcmd +login anonymous {workshop_item_arg + workshop_item_arg.join(str(m) for m in mods)} +quit >&2'
             util.run_sh(query)
 
         # TODO: ugly work around for weird steam problem
@@ -113,11 +105,11 @@ class SteamDownloader:
         return (ModFolder.read(mod_path), mod_path)
 
     @staticmethod
-    def replace_path(path):
+    def replace_path(path: Path) -> Path:
         path_parts = []
         found = False
         for n in reversed(path.parts):
-            if n == ".steam" and found == False:
+            if n == ".steam" and not found:
                 path_parts.append("Steam")
                 found = True
             else:
@@ -138,7 +130,7 @@ class WorkshopResult:
         rating: str = "",
         create_time: str = "",
         num_ratings: str = "",
-        required_items: dict[str, Any]=dict(),
+        required_items: dict[str, Any] = dict(),
     ) -> None:
         self._steamid = steamid
         self.name = name
@@ -175,21 +167,19 @@ class WorkshopResult:
         return self._steamid
 
     @steamid.setter
-    def steamid(self, *args) -> None:
+    def steamid(self, *args) -> None:  # noqa: ANN002
         raise AttributeError("WorkshopResult.steamid is immutable")
 
 
 class WorkshopWebScraper:
-    headers = {
+    headers = {  # noqa: RUF012
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
     }
-    index_query = (
-        "https://steamcommunity.com/workshop/browse/?appid=294100&searchtext={}"
-    )
+    index_query = "https://steamcommunity.com/workshop/browse/?appid=294100&searchtext={}"
     detail_query = "https://steamcommunity.com/sharedfiles/filedetails/?id={}"
 
     @classmethod
-    def _request(cls, url: str, term: str):
+    def _request(cls, url: str, term: str):  # noqa: ANN206
         max_retries = 5
         for n in range(max_retries + 1):
             try:
@@ -268,9 +258,7 @@ class WorkshopWebScraper:
         if reqItms:
             for itm in reqItms.children:
                 if isinstance(itm, Tag):
-                    modid = int(
-                        re.search(r"\d+", itm["href"]).group()
-                    )
+                    modid = int(re.search(r"\d+", itm["href"]).group())
                     # adding (*) at beginning of name to indicate a dependencies
                     modname = "(*) " + itm.find("div").get_text().strip()
                     required_mods.append(WorkshopResult(modid, name=modname))
@@ -279,7 +267,7 @@ class WorkshopWebScraper:
         return wsResult
 
     @classmethod
-    def search(cls, term: str, reverse: bool = False) -> List[WorkshopResult]:
+    def search(cls, term: str, reverse: bool = False) -> list[WorkshopResult]:
         page_result = BeautifulSoup(
             cls._request(cls.index_query, term),
             "html.parser",
@@ -289,12 +277,8 @@ class WorkshopWebScraper:
         for r in page_result:
             try:
                 item_title = r.find("div", class_="workshopItemTitle").get_text()
-                author_name = r.find("div", class_="workshopItemAuthorName").get_text()[
-                    3:
-                ]
-                steamid = int(
-                    re.search(r"\d+", r.find("a", class_="ugc")["href"]).group()
-                )
+                author_name = r.find("div", class_="workshopItemAuthorName").get_text()[3:]
+                steamid = int(re.search(r"\d+", r.find("a", class_="ugc")["href"]).group())
             except (AttributeError, ValueError):
                 continue
             results.append(WorkshopResult(steamid, name=item_title, author=author_name))

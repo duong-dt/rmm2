@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from __future__ import annotations
 
 import csv
@@ -9,7 +7,7 @@ from collections.abc import MutableSequence
 from pathlib import Path
 from typing import Any, Generator, Iterator, cast
 
-from .mod import Mod
+from rmm.mod import Mod
 
 
 class ModListSerializer(ABC):
@@ -25,7 +23,7 @@ class ModListSerializer(ABC):
 
 
 class CsvStringBuilder:
-    def __init__(self):
+    def __init__(self) -> None:
         self.value = []
 
     def write(self, row: str) -> None:
@@ -39,7 +37,7 @@ class CsvStringBuilder:
 
 
 class ModListV2Format(ModListSerializer):
-    HEADER = {"PACKAGE_ID": 0, "STEAM_ID": 1, "REPO_URL": 2}
+    HEADER = {"PACKAGE_ID": 0, "STEAM_ID": 1, "REPO_URL": 2}  # noqa: RUF012
     MAGIC_FLAG = "RMM_V2_MODLIST"
 
     @classmethod
@@ -101,10 +99,7 @@ class ModListV1Format(ModListSerializer):
             try:
                 yield Mod(
                     steamid=int(
-                        parsed[cls.STEAM_ID]
-                        .strip()
-                        .encode("ascii", errors="ignore")
-                        .decode()
+                        parsed[cls.STEAM_ID].strip().encode("ascii", errors="ignore").decode()
                     ),
                     name=name,
                     author=author,
@@ -121,7 +116,7 @@ class ModListV1Format(ModListSerializer):
 
     @classmethod
     def format(cls, mod: Mod) -> str:
-        return "{}# {} by {} ".format(str(mod.steamid), mod.name, mod.author)
+        return f"{mod.steamid!s}# {mod.name} by {mod.author} "
 
 
 class ModListFile:
