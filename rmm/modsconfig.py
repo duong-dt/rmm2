@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
-
 from pathlib import Path
 from typing import cast
 from xml.etree import ElementTree as ET
 
 from rmm import util
+from rmm.config import Config
 from rmm.mod import EXPANSION_PACKAGES, Mod
 
 
@@ -74,7 +73,7 @@ class ModsConfig:
         if m.packageid in self.mods:
             del self.mods[m.packageid]
 
-    def autosort(self, mods, config) -> None:
+    def autosort(self, mods: list[Mod], config: Config) -> None:
         import json
 
         import networkx as nx
@@ -103,9 +102,7 @@ class ModsConfig:
 
         populated_mods = {m.packageid: m for m in mods if m in self.mods}
 
-        rules_path = Path(
-            config.mod_path / "rupal.rimpymodmanagerdatabase/db/communityRules.json"
-        )
+        rules_path = Path(config.mod_path / "rupal.rimpymodmanagerdatabase/db/communityRules.json")
         if not rules_path.is_file():
             print("Downloading rules file\n")
             # import rmm.steam
@@ -114,9 +111,9 @@ class ModsConfig:
 
             manager.Manager(config).sync_mods([Mod(steamid=1847679158)])
 
-        with (
-            config.mod_path / "rupal.rimpymodmanagerdatabase/db/communityRules.json"
-        ).open("r", encoding="utf-8") as f:
+        with (config.mod_path / "rupal.rimpymodmanagerdatabase/db/communityRules.json").open(
+            "r", encoding="utf-8"
+        ) as f:
             community_db = json.load(f)
 
         for pid, m in populated_mods.items():
@@ -143,10 +140,7 @@ class ModsConfig:
         if "krkr.rocketman" in populated_mods:
             rocketman = True
 
-        if (
-            "murmur.walllight" in populated_mods
-            and "juanlopez2008.lightsout" in populated_mods
-        ):
+        if "murmur.walllight" in populated_mods and "juanlopez2008.lightsout" in populated_mods:
             DG.add_edge("juanlopez2008.lightsout", "murmur.walllight")
 
         mods_for_removal = {
@@ -198,9 +192,7 @@ class ModsConfig:
         if isinstance(mods, list):
             populated_mods = {m.packageid: m for m in mods if m.packageid in self.mods}
         elif isinstance(mods, dict):
-            populated_mods = {
-                m.packageid: m for m in mods.values() if m.packageid in self.mods
-            }
+            populated_mods = {m.packageid: m for m in mods.values() if m.packageid in self.mods}
         else:
             raise Exception("bad data type")
 

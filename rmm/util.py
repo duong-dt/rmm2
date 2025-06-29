@@ -12,7 +12,7 @@ def platform() -> Optional[str]:
     return sys.platform
 
 
-def execute(cmd) -> Generator[str, None, None]:
+def execute(cmd: str) -> Generator[str, None, None]:
     with subprocess.Popen(
         cmd,
         stdout=subprocess.PIPE,
@@ -89,7 +89,7 @@ def et_pretty_xml(root: ET.Element) -> str:
     ).toprettyxml(indent="  ", newl="\n")
 
 
-def sanitize_path(path: Union[str, Path]):
+def sanitize_path(path: Union[str, Path]) -> Path:
     if isinstance(path, Path):
         path = str(path)
 
@@ -98,14 +98,16 @@ def sanitize_path(path: Union[str, Path]):
 
     return Path(path).expanduser()
 
+
 def extract_download_path() -> str:
-    '''
+    """
     Get the path on where steamcmd downloads items from the query function
     This should prevent that bug where steamcmd downloads to a path different
     that the one that's hardcoded
-    '''
-    output: str = run_sh('env HOME="/tmp/rmm-dltest" steamcmd +login anonymous +workshop_download_item 294100 2009463077 +quit')
-    regex = re.compile(r'\".*rmm-dltest\/([\w\/\.]+294100).*\"')
+    """
+    output: str = run_sh(
+        'env HOME="/tmp/rmm-dltest" steamcmd +login anonymous +workshop_download_item 294100 2009463077 +quit'
+    )
+    regex = re.compile(r"\".*rmm-dltest\/([\w\/\.]+294100).*\"")
     match = regex.search(output).group(1)
     return match
-

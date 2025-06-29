@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from __future__ import annotations
 
 import csv
@@ -39,7 +37,7 @@ class CsvStringBuilder:
 
 
 class ModListV2Format(ModListSerializer):
-    HEADER = {"PACKAGE_ID": 0, "STEAM_ID": 1, "REPO_URL": 2}
+    HEADER = {"PACKAGE_ID": 0, "STEAM_ID": 1, "REPO_URL": 2}  # noqa: RUF012
     MAGIC_FLAG = "RMM_V2_MODLIST"
 
     @classmethod
@@ -101,10 +99,7 @@ class ModListV1Format(ModListSerializer):
             try:
                 yield Mod(
                     steamid=int(
-                        parsed[cls.STEAM_ID]
-                        .strip()
-                        .encode("ascii", errors="ignore")
-                        .decode()
+                        parsed[cls.STEAM_ID].strip().encode("ascii", errors="ignore").decode()
                     ),
                     name=name,
                     author=author,

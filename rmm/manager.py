@@ -108,28 +108,28 @@ class Manager:
         mods = ModFolder.read_dict(self.config.mod_path)
         return self._mod_config_state(mods)
 
-    def installed_mods_dict(self):
+    def installed_mods_dict(self) -> dict[str, Mod]:
         mods = ModFolder.read_dict(self.config.mod_path)
         return self._mod_config_state_dict(mods)
 
-    def search_installed(self, term):
+    def search_installed(self, term: str) -> list[Mod]:
         mods = ModFolder.search_dict(self.config.mod_path, term)
         return self._mod_config_state(mods)
 
-    def _enabled_mod_pids(self):
+    def _enabled_mod_pids(self) -> list[str]:
         return [k for k in self.modsconfig.mods]
 
-    def enabled_mods(self):
+    def enabled_mods(self) -> list[Mod]:
         installed_mods = self.installed_mods_dict()
-        l = list()
+        ret = list()
         for n in self.modsconfig.mods:
             try:
-                l.append(installed_mods[n])
+                ret.append(installed_mods[n])
             except KeyError:
                 continue
-        return l
+        return ret
 
-    def disabled_mods(self):
+    def disabled_mods(self) -> list[Mod]:
         enabled_mods = self._enabled_mod_pids()
         installed_mods = self.installed_mods()
         return util.list_loop_exclusion(installed_mods, enabled_mods)
@@ -141,7 +141,7 @@ class Manager:
             raise Exception("No package id for specifed mod")
         self.modsconfig.enable_mod(mod)
 
-    def enable_mods(self, mods) -> None:
+    def enable_mods(self, mods: list[str, Mod]) -> None:
         for n in mods:
             print("Enabling " + n.title())
             self._enable_mod(n)
@@ -155,20 +155,20 @@ class Manager:
             raise Exception("No package id for specifed mod")
         self.modsconfig.disable_mod(mod)
 
-    def disable_mods(self, mods) -> None:
+    def disable_mods(self, mods: list[str, Mod]) -> None:
         for n in mods:
             print("Disabling " + n.title())
             self._disable_mod(n)
         print("Updating ModsConfig.xml")
         self.modsconfig.write()
 
-    def verify_mods(self):
+    def verify_mods(self) -> bool:
         return self.modsconfig.verify_state(self.installed_mods())
 
     def sort_mods(self) -> None:
         self.modsconfig.autosort(self.installed_mods(), self.config)
 
-    def order_all_mods(self):
+    def order_all_mods(self) -> list[Mod]:
         installed_mods = self.installed_mods()
         enabled_mods = self._enabled_mod_pids()
         sorted_mods = self._order_mods(enabled_mods, installed_mods)
@@ -177,7 +177,7 @@ class Manager:
                 sorted_mods.append(m)
         return sorted_mods
 
-    def _order_mods(self, enabled_mods, installed_mods):
+    def _order_mods(self, enabled_mods: list[str], installed_mods: list[Mod]) -> list[Mod]:
         sorted_mods = []
         for m in EXPANSION_PACKAGES:
             m.enabled = True
@@ -188,7 +188,7 @@ class Manager:
                     break
         return sorted_mods
 
-    def order_mods(self):
+    def order_mods(self) -> list[str, Mod]:
         enabled_mods = self._enabled_mod_pids()
         installed_mods = self.installed_mods()
         return self._order_mods(enabled_mods, installed_mods)

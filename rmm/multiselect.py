@@ -1,17 +1,15 @@
-#!/usr/bin/env python3
-
 import curses
+import sys
+from curses import window
+
+from rmm.mod import Mod
 
 
 class WindowSizeException(Exception):
     pass
 
 
-class AbortModOrderException(Exception):
-    pass
-
-
-def multiselect_order_menu(stdscr, data):
+def multiselect_order_menu(stdscr: window, data: list[Mod]) -> list[tuple[str, bool]]:
     data = [(n.packageid, n.enabled) for n in data]
     k = 0
 
@@ -33,7 +31,7 @@ def multiselect_order_menu(stdscr, data):
     if window_width < 40 or window_height < 15:
         raise WindowSizeException()
 
-    def check_bounds(location, data, delta_position) -> bool:
+    def check_bounds(location: int, data: list, delta_position: int) -> bool:
         if delta_position > 0:
             if location < len(data) - 1:
                 return True
@@ -42,15 +40,15 @@ def multiselect_order_menu(stdscr, data):
                 return True
         return False
 
-    def move_selection(selected, l, d):
-        if d > 0 and check_bounds(selected, l, d):
+    def move_selection(selected: int, items: list, d: int) -> list:
+        if d > 0 and check_bounds(selected, items, d):
             return selected + 1
         if d < 0:
-            if selected > 0 and check_bounds(selected, l, d):
+            if selected > 0 and check_bounds(selected, items, d):
                 return selected - 1
         return selected
 
-    def list_swap(data, offset, pos) -> None:
+    def list_swap(data: list, offset: int, pos: int) -> None:
         temp = data[offset], data[offset + pos]
         data[offset + pos] = temp[0]
         data[offset] = temp[1]
@@ -80,7 +78,7 @@ def multiselect_order_menu(stdscr, data):
             return data
 
         elif k == ord("q"):
-            raise AbortModOrderException()
+            sys.exit(1)
 
         if scroll_window_position < len(data) - 1 and selection > (
             scroll_window_position + scroll_window_height - 1
@@ -140,17 +138,3 @@ def multiselect_order_menu(stdscr, data):
 
         # Wait for next input
         k = stdscr.getch()
-
-
-def main() -> None:
-    text = [
-        ("jaxe.rimhud", True),
-        ("fluffies.desirepaths", False),
-        ("i eat bagels", False),
-        ("chonky.cats", False),
-    ]
-    print(curses.wrapper(multiselect_order_menu, text))
-
-
-if __name__ == "__main__":
-    main()

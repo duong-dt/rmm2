@@ -33,7 +33,7 @@ class Mod:
     def title(self) -> str:
         return self.packageid or f"{self.name} by {self.author}"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.packageid:
             self.packageid = self.packageid.lower()
         if self.before:
@@ -41,7 +41,7 @@ class Mod:
         if self.after:
             self.after = [item.lower() for item in self.after]
 
-    def __eq__(self, other: Mod | str | int):
+    def __eq__(self, other: Mod | str | int) -> bool:
         if isinstance(other, Mod):
             return (self.packageid and self.packageid == other.packageid) or (
                 self.steamid and self.steamid == other.steamid
@@ -52,7 +52,7 @@ class Mod:
             return self.steamid == other
         return NotImplemented
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         if not self.packageid:
             raise ValueError("InvalidPackageHash")
         return hash(self.packageid)
@@ -66,7 +66,7 @@ class Mod:
         return {mod.packageid: mod for mod in mods if mod.packageid}
 
     @staticmethod
-    def create_from_path(path) -> Mod | None:
+    def create_from_path(path: Path) -> Mod | None:
         def find_about_xml(path: Path) -> Path | None:
             # Use glob to get the case-insensitive About.xml path
             matches = list(path.glob("About/[Aa][Bb][Oo][Uu][Tt].[Xx][Mm][Ll]"))
@@ -89,9 +89,7 @@ class Mod:
 
         def read_steamid(path: Path) -> int | None:
             try:
-                file_content = (
-                    (path / "About" / "PublishedFileId.txt").read_text().strip()
-                )
+                file_content = (path / "About" / "PublishedFileId.txt").read_text().strip()
                 return int(file_content.encode("ascii", errors="ignore").decode())
             except (OSError, ValueError):
                 if DEBUG:
@@ -168,7 +166,7 @@ class ModFolder:
         return Mod.list_to_dict(ModFolder.read(path))
 
     @staticmethod
-    def search(path: Path, search_term) -> list[Mod]:
+    def search(path: Path, search_term: str) -> list[Mod]:
         return [
             r
             for r in ModFolder.read(path)
@@ -178,7 +176,7 @@ class ModFolder:
         ]
 
     @staticmethod
-    def search_dict(path: Path, search_term) -> dict[str, Mod]:
+    def search_dict(path: Path, search_term: str) -> dict[str, Mod]:
         return Mod.list_to_dict(ModFolder.search(path, search_term))
 
 

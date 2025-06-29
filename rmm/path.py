@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from pathlib import Path
 from typing import Optional
 
@@ -7,7 +5,7 @@ from rmm import util
 
 
 class PathFinder:
-    DEFAULT_GAME_PATHS = [
+    DEFAULT_GAME_PATHS = [  # noqa: RUF012
         ("~/GOG Games/RimWorld", "linux"),
         ("~/games/rimworld", "linux"),
         ("~/.local/share/Steam/steamapps/common/RimWorld", "linux"),
@@ -18,7 +16,7 @@ class PathFinder:
         ("C:/Program Files/Steam/steamapps/common/RimWorld", "win32"),
     ]
 
-    DEFAULT_WORKSHOP_PATHS = [
+    DEFAULT_WORKSHOP_PATHS = [  # noqa: RUF012
         ("~/.local/share/Steam/steamapps/workshop/content/294100", "linux"),
         (
             "~/Library/Application Support/Steam/steamapps/workshop/content/294100",
@@ -31,7 +29,7 @@ class PathFinder:
         ("C:/Program Files/Steam/steamapps/common/workshop/content/294100", "win32"),
     ]
 
-    DEFAULT_CONFIG_PATHS = [
+    DEFAULT_CONFIG_PATHS = [  # noqa: RUF012
         ("~/Library/Application Support/RimWorld/", "darwin"),
         ("~/.config/unity3d/Ludeon Studios/RimWorld by Ludeon Studios", "linux"),
         ("~/AppData/LocalLow/Ludeon Studios/RimWorld by Ludeon Studios", "win32"),
@@ -47,11 +45,7 @@ class PathFinder:
 
     @staticmethod
     def _is_workshop_dir(p: Path) -> bool:
-        return (
-            p.name == "294100"
-            and p.parts[-2] == "content"
-            and p.parts[-3] == "workshop"
-        )
+        return p.name == "294100" and p.parts[-2] == "content" and p.parts[-3] == "workshop"
 
     @staticmethod
     def _is_config_dir(p: Path) -> bool:
@@ -63,7 +57,7 @@ class PathFinder:
         return True
 
     @staticmethod
-    def _search_root(p: Path, f) -> Optional[Path]:
+    def _search_root(p: Path, f: callable) -> Optional[Path]:
         try:
             p = util.sanitize_path(p)
             for n in p.glob("**/"):
@@ -74,16 +68,14 @@ class PathFinder:
             return None
 
     @staticmethod
-    def get_workshop_from_game_path(p: Path):
+    def get_workshop_from_game_path(p: Path) -> Path:
         p = util.sanitize_path(p)
         for index, dirname in enumerate(p.parts):
             if dirname == "steamapps":
-                return Path(*list(p.parts[0:index])) / Path(
-                    "steamapps/workshop/content/294100"
-                )
+                return Path(*list(p.parts[0:index])) / Path("steamapps/workshop/content/294100")
 
     @staticmethod
-    def _search_defaults(defaults: list[str], f) -> Optional[Path]:
+    def _search_defaults(defaults: list[str], f: callable) -> Optional[Path]:
         platform = util.platform()
         for path in [n[0] for n in defaults if n[1] == platform]:
             path = util.sanitize_path(path)

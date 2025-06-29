@@ -5,7 +5,7 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Callable, Iterable, cast
+from typing import Any, Callable, Iterable, cast
 
 from tabulate import tabulate
 
@@ -85,8 +85,8 @@ argument to select from all mods.
 """
 
 
-def mods_config_dec(func):
-    def wrapper_func(*args, **kwargs) -> None:
+def mods_config_dec(func: callable) -> callable:
+    def wrapper_func(*args, **kwargs) -> None:  # noqa: ANN002, ANN003
         try:
             args[1].modsconfig
         except AttributeError:
@@ -135,7 +135,7 @@ def _interactive_verify(mods: list[Mod], verb: str) -> bool:
     return True
 
 
-def _cli_parse_modlist(args):
+def _cli_parse_modlist(args: list[str]) -> list[Mod]:
     modlist_filename = args[2]
     modlist_path = Path(modlist_filename)
     queue = ModListFile.read(modlist_path)
@@ -168,6 +168,7 @@ def _interactive_selection(args: list[str], manager: Manager, verb: str, f: Call
         if verb == "enable" or verb == "disable":
             print("\nRecommend to use auto sort")
 
+
 def _expand_ranges(s: str) -> str:
     return re.sub(
         r"(\d+)-(\d+)",
@@ -179,12 +180,12 @@ def _expand_ranges(s: str) -> str:
 
 
 def tabulate_mod_or_wr(
-    mods,
-    numbered=False,
-    reverse=False,
-    alpha=False,
-    reversed_numbering=True,
-    light=False,
+    mods: list[Mod] | list[WorkshopResult] | dict[Any, Mod],
+    numbered: bool = False,
+    reverse: bool = False,
+    alpha: bool = False,
+    reversed_numbering: bool = True,
+    light: bool = False,
 ) -> str:
     if not mods:
         return ""
@@ -225,7 +226,7 @@ def tabulate_mod_or_wr(
     )
 
 
-def _get_long_name_from_alias_map(word, _list):
+def _get_long_name_from_alias_map(word: str, _list: list[str, tuple]) -> str | None:
     for item in _list:
         if isinstance(item, tuple):
             if word in list(item):
@@ -236,7 +237,7 @@ def _get_long_name_from_alias_map(word, _list):
     return None
 
 
-def help(args: list[str], manager: Manager) -> None:
+def help(args: list[str], manager: Manager) -> None:  # noqa: A001
     print(USAGE)
 
 
@@ -305,11 +306,7 @@ def capture_indexes(strInput: str) -> list[int]:
 def sync(args: list[str], manager: Manager) -> None:
     joined_args = " ".join(args[1:])
     results = WorkshopWebScraper.search(joined_args)
-    print(
-        tabulate_mod_or_wr(
-            results, numbered=True, reverse=True, reversed_numbering=True
-        )
-    )
+    print(tabulate_mod_or_wr(results, numbered=True, reverse=True, reversed_numbering=True))
     print("Packages to install (eg: 2 or 1-3)")
     selection = capture_range(len(results))
     if not selection:
@@ -336,7 +333,12 @@ def sync(args: list[str], manager: Manager) -> None:
     if queue:
         print(
             "Package(s): \n{} \n\nwill be installed.".format(
-                "  \n".join([f"{m.name} {"by "+m.author if m.author else ""}" for m in sorted(queue, key = lambda q: str(q))])
+                "  \n".join(
+                    [
+                        f"{m.name} {'by ' + m.author if m.author else ''}"
+                        for m in sorted(queue, key=lambda q: str(q))
+                    ]
+                )
             )
         )
 
@@ -394,9 +396,7 @@ def sort(args: list[str], manager: Manager) -> None:
 def update(args: list[str], manager: Manager) -> bool | None:
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
-    installed_mods_names = "\n  ".join(
-        [n.name for n in manager.installed_mods() if n.name]
-    )
+    installed_mods_names = "\n  ".join([n.name for n in manager.installed_mods() if n.name])
     print("Preparing to update following packages:")
     print(installed_mods_names)
     print(
@@ -493,9 +493,7 @@ def parse_options() -> Config:
     config = Config()
     del sys.argv[0]
     try:
-        while s := _get_long_name_from_alias_map(
-            sys.argv[0], [p for p in path_options]
-        ):
+        while s := _get_long_name_from_alias_map(sys.argv[0], [p for p in path_options]):
             del sys.argv[0]
             print(sys.argv[0])
             path_str = sys.argv[0]
