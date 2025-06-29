@@ -1,6 +1,32 @@
 # CHANGELOG
 
 
+## v1.3.0 (2025-06-29)
+
+### Bug Fixes
+
+- Fix unknown package version
+  ([`e3a186f`](https://github.com/duong-dt/rmm2/commit/e3a186f60620436fe5da2cf1dcb12f23a46ea1b2))
+
+### Chores
+
+- Fix ruff linter warnings
+  ([`dc5d858`](https://github.com/duong-dt/rmm2/commit/dc5d858db5e80c56f9b7ae8c3662672468bc9616))
+
+- Ruff linter auto fix
+  ([`f3c9e14`](https://github.com/duong-dt/rmm2/commit/f3c9e14a24d5b17b4ed6987aa75805bb2c3c7d58))
+
+### Continuous Integration
+
+- Run ruff static check before release
+  ([`07cc971`](https://github.com/duong-dt/rmm2/commit/07cc9716194290692527add67b888fa27170b7bc))
+
+### Features
+
+- **sync**: Ignore already installed mods
+  ([`8cca1f9`](https://github.com/duong-dt/rmm2/commit/8cca1f933813bcc1124246898100a42d5f0b585b))
+
+
 ## v1.2.0 (2025-06-05)
 
 ### Bug Fixes
