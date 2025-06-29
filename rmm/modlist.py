@@ -9,7 +9,7 @@ from collections.abc import MutableSequence
 from pathlib import Path
 from typing import Any, Generator, Iterator, cast
 
-from .mod import Mod
+from rmm.mod import Mod
 
 
 class ModListSerializer(ABC):
@@ -25,7 +25,7 @@ class ModListSerializer(ABC):
 
 
 class CsvStringBuilder:
-    def __init__(self):
+    def __init__(self) -> None:
         self.value = []
 
     def write(self, row: str) -> None:
@@ -121,7 +121,7 @@ class ModListV1Format(ModListSerializer):
 
     @classmethod
     def format(cls, mod: Mod) -> str:
-        return "{}# {} by {} ".format(str(mod.steamid), mod.name, mod.author)
+        return f"{mod.steamid!s}# {mod.name} by {mod.author} "
 
 
 class ModListFile:

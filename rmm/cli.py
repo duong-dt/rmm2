@@ -86,7 +86,7 @@ argument to select from all mods.
 
 
 def mods_config_dec(func):
-    def wrapper_func(*args, **kwargs):
+    def wrapper_func(*args, **kwargs) -> None:
         try:
             args[1].modsconfig
         except AttributeError:
@@ -122,7 +122,7 @@ def _interactive_query(manager: Manager, term: str, verb: str) -> list[Mod] | No
         return None
 
 
-def _interactive_verify(mods: list[Mod], verb: str):
+def _interactive_verify(mods: list[Mod], verb: str) -> bool:
     print("Selected mods:")
     for m in mods:
         print(m.title())
@@ -201,7 +201,7 @@ def tabulate_mod_or_wr(
         return None
 
     if numbered:
-        headers = ["no"] + headers
+        headers = ["no", *headers]
         new_list = []
         offset = 0
         if not reverse:
@@ -236,11 +236,11 @@ def _get_long_name_from_alias_map(word, _list):
     return None
 
 
-def help(args: list[str], manager: Manager):
+def help(args: list[str], manager: Manager) -> None:
     print(USAGE)
 
 
-def version(args: list[str], manager: Manager):
+def version(args: list[str], manager: Manager) -> None:
     try:
         print(importlib.metadata.version("rmm2"))
     except importlib.metadata.PackageNotFoundError:
@@ -248,21 +248,21 @@ def version(args: list[str], manager: Manager):
 
 
 @mods_config_dec
-def _list(args: list[str], manager: Manager):
+def _list(args: list[str], manager: Manager) -> None:
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
     print(tabulate_mod_or_wr(manager.installed_mods(), alpha=True))
 
 
 @mods_config_dec
-def query(args: list[str], manager: Manager):
+def query(args: list[str], manager: Manager) -> None:
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
     search_term = " ".join(args[1:])
     print(tabulate_mod_or_wr(manager.search_installed(search_term), alpha=True))
 
 
-def search(args: list[str], manager: Manager):
+def search(args: list[str], manager: Manager) -> None:
     joined_args = " ".join(args[1:])
     results = WorkshopWebScraper.search(joined_args, reverse=True)
     print(tabulate_mod_or_wr(results))
@@ -345,22 +345,22 @@ def sync(args: list[str], manager: Manager) -> None:
         print("Selected package(s) are already installed")
 
 
-def remove(args: list[str], manager: Manager):
+def remove(args: list[str], manager: Manager) -> None:
     _interactive_selection(args, manager, "remove", manager.remove_mods)
 
 
 @mods_config_dec
-def enable(args: list[str], manager: Manager):
+def enable(args: list[str], manager: Manager) -> None:
     _interactive_selection(args, manager, "enable", manager.enable_mods)
 
 
 @mods_config_dec
-def disable(args: list[str], manager: Manager):
+def disable(args: list[str], manager: Manager) -> None:
     _interactive_selection(args, manager, "disable", manager.disable_mods)
 
 
 @mods_config_dec
-def config(args: list[str], manager: Manager):
+def config(args: list[str], manager: Manager) -> None:
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
     if not manager.config.modsconfig_path:
@@ -372,14 +372,14 @@ def config(args: list[str], manager: Manager):
 
     data = manager.order_all_mods()
     mod_state = curses.wrapper(multiselect.multiselect_order_menu, data)
-    new_mod_order = [k for k, v in mod_state if v == True]
+    new_mod_order = [k for k, v in mod_state if v]
 
     manager.modsconfig.mods = new_mod_order
     manager.modsconfig.write()
 
 
 @mods_config_dec
-def sort(args: list[str], manager: Manager):
+def sort(args: list[str], manager: Manager) -> None:
     # print(manager.config.config_path)
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
@@ -391,7 +391,7 @@ def sort(args: list[str], manager: Manager):
 
 
 @mods_config_dec
-def update(args: list[str], manager: Manager):
+def update(args: list[str], manager: Manager) -> bool | None:
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
     installed_mods_names = "\n  ".join(
@@ -412,7 +412,7 @@ def update(args: list[str], manager: Manager):
 
 
 @mods_config_dec
-def export(args: list[str], manager: Manager):
+def export(args: list[str], manager: Manager) -> None:
     if not manager.config.mod_path:
         raise Exception("Game path not defined")
     if args[1] == "-e":
@@ -430,7 +430,7 @@ def export(args: list[str], manager: Manager):
 
 
 @mods_config_dec
-def _import(args: list[str], manager: Manager):
+def _import(args: list[str], manager: Manager) -> bool | None:
     joined_args = " ".join(args[1:])
     mod_install_queue = ModListFile.read(Path(joined_args))
 
@@ -452,7 +452,7 @@ def _import(args: list[str], manager: Manager):
 
 
 @mods_config_dec
-def order(args: list[str], manager: Manager):
+def order(args: list[str], manager: Manager) -> None:
     print(
         tabulate_mod_or_wr(
             manager.order_mods(),
@@ -463,11 +463,11 @@ def order(args: list[str], manager: Manager):
     )
 
 
-def verify(args: list[str], manager: Manager):
+def verify(args: list[str], manager: Manager) -> None:
     print(manager.verify_mods())
 
 
-def windows_setup():
+def windows_setup() -> None:
     try:
         if not util.platform() == "win32":
             pass
@@ -512,7 +512,7 @@ def parse_options() -> Config:
     return config
 
 
-def run():
+def run() -> None:
     windows_setup()
     config = parse_options()
     if config.mod_path:

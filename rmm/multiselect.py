@@ -33,7 +33,7 @@ def multiselect_order_menu(stdscr, data):
     if window_width < 40 or window_height < 15:
         raise WindowSizeException()
 
-    def check_bounds(location, data, delta_position):
+    def check_bounds(location, data, delta_position) -> bool:
         if delta_position > 0:
             if location < len(data) - 1:
                 return True
@@ -50,7 +50,7 @@ def multiselect_order_menu(stdscr, data):
                 return selected - 1
         return selected
 
-    def list_swap(data, offset, pos):
+    def list_swap(data, offset, pos) -> None:
         temp = data[offset], data[offset + pos]
         data[offset + pos] = temp[0]
         data[offset] = temp[1]
@@ -109,9 +109,9 @@ def multiselect_order_menu(stdscr, data):
         for i, (k, v) in enumerate(
             data[scroll_window_position : scroll_window_position + scroll_window_height]
         ):
-            if v == False:
+            if not v:
                 stdscr.addstr(start_y, start_x - 3, "-")
-            if v == True:
+            if v:
                 stdscr.addstr(start_y, start_x - 3, "+")
             if selection == i + scroll_window_position:
                 stdscr.attron(curses.A_STANDOUT)
@@ -142,7 +142,7 @@ def multiselect_order_menu(stdscr, data):
         k = stdscr.getch()
 
 
-def main():
+def main() -> None:
     text = [
         ("jaxe.rimhud", True),
         ("fluffies.desirepaths", False),

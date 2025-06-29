@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Union
+from typing import Union
 
 from rmm import util
 from rmm.config import Config
@@ -9,14 +9,14 @@ from rmm.steam import SteamDownloader, WorkshopResult
 
 
 class Manager:
-    def __init__(self, config: Config):
+    def __init__(self, config: Config) -> None:
         if not isinstance(config, Config):
             raise Exception("Must pass Config object to Manager")
         self.config = config
         if self.config.modsconfig_path:
             self.modsconfig = ModsConfig(self.config.modsconfig_path)
 
-    def install_mod(self, steam_cache: Path, steamid: int):
+    def install_mod(self, steam_cache: Path, steamid: int) -> bool:
         if not steamid:
             raise Exception("Missing SteamID")
         mod = Mod.create_from_path(steam_cache / str(steamid))
@@ -38,7 +38,7 @@ class Manager:
             return False
         return True
 
-    def remove_mod(self, mod: Mod):
+    def remove_mod(self, mod: Mod) -> None:
         if not self.config.mod_path:
             raise Exception("Game path not defined")
 
@@ -134,28 +134,28 @@ class Manager:
         installed_mods = self.installed_mods()
         return util.list_loop_exclusion(installed_mods, enabled_mods)
 
-    def _enable_mod(self, mod: Union[str, Mod]):
+    def _enable_mod(self, mod: Union[str, Mod]) -> None:
         if isinstance(mod, str):
             mod = Mod(packageid=mod)
         if not mod.packageid:
             raise Exception("No package id for specifed mod")
         self.modsconfig.enable_mod(mod)
 
-    def enable_mods(self, mods):
+    def enable_mods(self, mods) -> None:
         for n in mods:
             print("Enabling " + n.title())
             self._enable_mod(n)
         print("Updating ModsConfig.xml")
         self.modsconfig.write()
 
-    def _disable_mod(self, mod: Union[str, Mod]):
+    def _disable_mod(self, mod: Union[str, Mod]) -> None:
         if isinstance(mod, str):
             mod = Mod(packageid=mod)
         if not mod.packageid:
             raise Exception("No package id for specifed mod")
         self.modsconfig.disable_mod(mod)
 
-    def disable_mods(self, mods):
+    def disable_mods(self, mods) -> None:
         for n in mods:
             print("Disabling " + n.title())
             self._disable_mod(n)
@@ -165,7 +165,7 @@ class Manager:
     def verify_mods(self):
         return self.modsconfig.verify_state(self.installed_mods())
 
-    def sort_mods(self):
+    def sort_mods(self) -> None:
         self.modsconfig.autosort(self.installed_mods(), self.config)
 
     def order_all_mods(self):

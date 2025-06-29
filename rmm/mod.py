@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from multiprocessing import Pool
 from pathlib import Path
-from typing import TYPE_CHECKING, Optional, Union, cast
+from typing import TYPE_CHECKING, cast
 
 from rmm import util
 
@@ -16,19 +16,19 @@ DEBUG = False
 
 @dataclass
 class Mod:
-    packageid: Optional[str] = field(default_factory=str)
+    packageid: str | None = field(default_factory=str)
     before: list[str] = field(default_factory=list)
     after: list[str] = field(default_factory=list)
     incompatible: list[str] = field(default_factory=list)
-    dirname: Optional[Path] = None
+    dirname: Path | None = None
     author: str = "Unknown"
-    name: Optional[str] = None
+    name: str | None = None
     versions: list[str] = field(default_factory=list)
-    steamid: Optional[int] = None
+    steamid: int | None = None
     ignored: bool = False
-    repo_url: Optional[str] = None
-    workshop_managed: Optional[bool] = None
-    enabled: Optional[bool] = None
+    repo_url: str | None = None
+    workshop_managed: bool | None = None
+    enabled: bool | None = None
 
     def title(self) -> str:
         return self.packageid or f"{self.name} by {self.author}"
@@ -41,7 +41,7 @@ class Mod:
         if self.after:
             self.after = [item.lower() for item in self.after]
 
-    def __eq__(self, other: Union["Mod", str, int]):
+    def __eq__(self, other: Mod | str | int):
         if isinstance(other, Mod):
             return (self.packageid and self.packageid == other.packageid) or (
                 self.steamid and self.steamid == other.steamid
@@ -66,8 +66,8 @@ class Mod:
         return {mod.packageid: mod for mod in mods if mod.packageid}
 
     @staticmethod
-    def create_from_path(path) -> Optional[Mod]:
-        def find_about_xml(path: Path) -> Optional[Path]:
+    def create_from_path(path) -> Mod | None:
+        def find_about_xml(path: Path) -> Path | None:
             # Use glob to get the case-insensitive About.xml path
             matches = list(path.glob("About/[Aa][Bb][Oo][Uu][Tt].[Xx][Mm][Ll]"))
             return matches[0] if matches else None
@@ -75,25 +75,25 @@ class Mod:
         def parse_tree(file_path: Path) -> ET.ElementTree:
             return ET.parse(file_path)
 
-        def extract_packageid(root: ET.Element) -> Optional[str]:
+        def extract_packageid(root: ET.Element) -> str | None:
             try:
                 return cast(str, cast(ET.Element, root.find("packageId")).text).lower()
             except AttributeError:
                 name = util.element_grab("name", root)
                 author = util.element_grab("author", root)
                 if name and author:
-                    return "{}.{}".format(name.lower(), author.lower())
+                    return f"{name.lower()}.{author.lower()}"
             if DEBUG:
                 raise AttributeError("Could not find or infer package ID")
             return None
 
-        def read_steamid(path: Path) -> Optional[int]:
+        def read_steamid(path: Path) -> int | None:
             try:
                 file_content = (
                     (path / "About" / "PublishedFileId.txt").read_text().strip()
                 )
                 return int(file_content.encode("ascii", errors="ignore").decode())
-            except (OSError, ValueError, IOError):
+            except (OSError, ValueError):
                 if DEBUG:
                     print(f"Error reading steamid from {path}")
                 return None
@@ -108,7 +108,7 @@ class Mod:
         try:
             about_xml_path = find_about_xml(path)
             if not about_xml_path:
-                if not "Place mods here.txt" in str(path):
+                if "Place mods here.txt" not in str(path):
                     print(f"No About.xml found in {path}")
                 return None
 

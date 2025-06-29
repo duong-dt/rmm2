@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-from typing import List, cast
+from typing import cast
 from xml.etree import ElementTree as ET
 
-from . import util
-from .mod import EXPANSION_PACKAGES, Mod
+from rmm import util
+from rmm.mod import EXPANSION_PACKAGES, Mod
 
 
 class ModsConfig:
-    def __init__(self, p: Path):
+    def __init__(self, p: Path) -> None:
         if isinstance(p, str):
             p = Path(p)
         self.path = p.expanduser()
@@ -39,7 +39,7 @@ class ModsConfig:
         except TypeError:
             self.expansions = []
 
-    def write(self):
+    def write(self) -> None:
         active_mods = self.root.find("activeMods")
         if not active_mods:
             return
@@ -67,17 +67,18 @@ class ModsConfig:
             print("Unable to write ModsConfig")
             raise
 
-    def enable_mod(self, m: Mod):
+    def enable_mod(self, m: Mod) -> None:
         self.mods[m.packageid] = None
 
-    def disable_mod(self, m: Mod):
+    def disable_mod(self, m: Mod) -> None:
         if m.packageid in self.mods:
             del self.mods[m.packageid]
 
-    def autosort(self, mods, config):
+    def autosort(self, mods, config) -> None:
         import json
 
         import networkx as nx
+
         import rmm.manager as manager
 
         DG = nx.DiGraph()
@@ -93,7 +94,7 @@ class ModsConfig:
 
         combined_load_order = before_core + core + expansion_load_order
         for n, pid in enumerate(combined_load_order):
-            if not pid in self.mods:
+            if pid not in self.mods:
                 del combined_load_order[n]
 
         for k in range(0, len(combined_load_order)):
@@ -157,7 +158,7 @@ class ModsConfig:
         for pid, m in populated_mods.items():
             if rocketman and pid != "krkr.rocketman":
                 DG.add_edge("krkr.rocketman", pid)
-            if not m in combined_load_order:
+            if m not in combined_load_order:
                 for n in combined_load_order:
                     DG.add_edge(pid, n)
             if m.after:
@@ -193,7 +194,7 @@ class ModsConfig:
                 DG.remove_edge(*cycle[0])
                 count += 1
 
-    def verify_state(self, mods: list[Mod]):
+    def verify_state(self, mods: list[Mod]) -> bool:
         if isinstance(mods, list):
             populated_mods = {m.packageid: m for m in mods if m.packageid in self.mods}
         elif isinstance(mods, dict):

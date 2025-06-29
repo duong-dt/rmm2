@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
-from . import util
+from rmm import util
 
 
 class PathFinder:
@@ -58,7 +58,7 @@ class PathFinder:
         files_to_find = ["Config", "Saves"]
         child_names = [f.name for f in p.iterdir()]
         for target_name in files_to_find:
-            if not target_name in child_names:
+            if target_name not in child_names:
                 return False
         return True
 

@@ -9,7 +9,7 @@ import urllib.request
 import zipfile
 from functools import cache
 from pathlib import Path
-from typing import Any, List, Tuple
+from typing import Any, Tuple
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -22,7 +22,7 @@ STEAMCMD_WINDOWS_URL = "https://steamcdn-a.akamaihd.net/client/installer/steamcm
 
 class SteamDownloader:
     @staticmethod
-    def download_steamcmd_windows(path):
+    def download_steamcmd_windows(path) -> None:
         download_path = path / "steamcmd.zip"
         max_retries = 10
         print("Installing SteamCMD")
@@ -93,17 +93,12 @@ class SteamDownloader:
             if not (home_path / "steamcmd.exe").exists():
                 SteamDownloader.download_steamcmd_windows(home_path)
 
-            query = "steamcmd +login anonymous {} +quit".format(
-                workshop_item_arg + workshop_item_arg.join(str(m) for m in mods),
-            )
+            query = f"steamcmd +login anonymous {workshop_item_arg + workshop_item_arg.join(str(m) for m in mods)} +quit"
             print()
             for n in util.execute(query):
                 print(n, end="")
         else:
-            query = 'env HOME="{}" steamcmd +login anonymous {} +quit >&2'.format(
-                str(home_path),
-                workshop_item_arg + workshop_item_arg.join(str(m) for m in mods),
-            )
+            query = f'env HOME="{home_path!s}" steamcmd +login anonymous {workshop_item_arg + workshop_item_arg.join(str(m) for m in mods)} +quit >&2'
             util.run_sh(query)
 
         # TODO: ugly work around for weird steam problem
@@ -117,7 +112,7 @@ class SteamDownloader:
         path_parts = []
         found = False
         for n in reversed(path.parts):
-            if n == ".steam" and found == False:
+            if n == ".steam" and not found:
                 path_parts.append("Steam")
                 found = True
             else:

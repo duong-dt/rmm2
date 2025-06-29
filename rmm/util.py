@@ -4,7 +4,7 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from typing import Generator, List, Optional, Union, cast
+from typing import Generator, Optional, Union, cast
 from xml.dom import minidom
 
 
@@ -35,18 +35,18 @@ def run_sh(cmd: str) -> str:
     return subprocess.check_output(cmd, text=True, shell=True).strip()
 
 
-def copy(source: Path, destination: Path, recursive: bool = False):
+def copy(source: Path, destination: Path, recursive: bool = False) -> None:
     if recursive:
         shutil.copytree(source, destination)
     else:
         shutil.copy2(source, destination, follow_symlinks=True)
 
 
-def move(source: Path, destination: Path):
+def move(source: Path, destination: Path) -> None:
     shutil.move(source, destination)
 
 
-def remove(dest: Path):
+def remove(dest: Path) -> None:
     shutil.rmtree(dest)
 
 
